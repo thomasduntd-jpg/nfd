@@ -1,0 +1,276 @@
+import ScrollToTop from "./ScrollToTop";
+
+export default function Home() {
+  return (
+    <>
+      {/* Кнопка наверх — ВЫНЕСЕНА наружу */}
+      <ScrollToTop />
+
+      <div className="page-wrapper">
+        <div className="main-frame">
+
+          {/* HERO */}
+          <section className="hero">
+            <div className="hero-top">
+              <div className="hero-description">
+                <p className="about-text">
+                  Федосов Николай, графический дизайнер с навыками
+                  в разных сферах. Нахожу решения в айдентике, графике,
+                  3D, визуализации, полиграфии, смм, анимации.
+                </p>
+                <div className="contacts">
+                  <a
+                    href="https://t.me/whoseyournemy"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="contact-link"
+                  >
+                    телеграм
+                  </a>
+                  <a
+                    href="mailto:whoseyournemy@yandex.ru"
+                    className="contact-link"
+                  >
+                    whoseyournemy@yandex.ru
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div className="hero-bottom">
+              <nav className="nav-menu">
+                <a href="#logoteka" className="nav-item">
+                  <span>логотека</span>
+                  <img src="/icons/arrow.svg" alt="" className="nav-arrow" />
+                </a>
+                <a href="#identity" className="nav-item">
+                  <span>айдентика</span>
+                  <img src="/icons/arrow.svg" alt="" className="nav-arrow" />
+                </a>
+                <a href="#graphics" className="nav-item">
+                  <span>графика</span>
+                  <img src="/icons/arrow.svg" alt="" className="nav-arrow" />
+                </a>
+                <a href="#threed" className="nav-item">
+                  <span>3D</span>
+                  <img src="/icons/arrow.svg" alt="" className="nav-arrow" />
+                </a>
+                <a href="#animation" className="nav-item">
+                  <span>анимация</span>
+                  <img src="/icons/arrow.svg" alt="" className="nav-arrow" />
+                </a>
+              </nav>
+
+              <div className="hero-photo">
+                <img
+                  src="/images/nf.jpg"
+                  alt="Федосов Николай"
+                  className="photo-img"
+                />
+              </div>
+            </div>
+          </section>
+
+          {/* ЛОГОТЕКА */}
+          <section id="logoteka" className="section">
+            <div className="section-divider">
+              <div className="divider-line"></div>
+              <h2 className="section-title">логотека</h2>
+            </div>
+
+            <div className="logo-grid">
+              <div className="logo-item">
+                <div className="logo-image-wrapper">
+                  <img src="/images/logo-tyumen.png" alt="Тюмень" className="logo-image" />
+                </div>
+                <p className="logo-name">Тюмень</p>
+                <p className="logo-desc">Айдентика города</p>
+                <a href="https://dprofile.ru" target="_blank" rel="noopener noreferrer" className="btn-blue">Кейс на Dprofile</a>
+              </div>
+
+              <div className="logo-item">
+                <div className="logo-image-wrapper">
+                  <img src="/images/logo-kmu.png" alt="КМУ" className="logo-image" />
+                </div>
+                <p className="logo-name">КМУ</p>
+                <p className="logo-desc">ЛГУ им. Пушкина</p>
+              </div>
+
+              <div className="logo-item">
+                <div className="logo-image-wrapper">
+                  <img src="/images/logo-astro.png" alt="Astro" className="logo-image" />
+                </div>
+                <p className="logo-name">Astro</p>
+                <p className="logo-desc">Астрономическое сообщество</p>
+              </div>
+
+              <div className="logo-item">
+                <div className="logo-image-wrapper">
+                  <img src="/images/logo-paleopark.png" alt="Палеопарк России" className="logo-image" />
+                </div>
+                <p className="logo-name">Палеопарк России</p>
+                <p className="logo-desc">Палеонтологический парк</p>
+              </div>
+
+              <div className="logo-item">
+                <div className="logo-image-wrapper">
+                  <img src="/images/logo-platoria.png" alt="Platoria" className="logo-image" />
+                </div>
+                <p className="logo-name">Platoria</p>
+                <p className="logo-desc">Ai-помощник выбора товаров</p>
+              </div>
+
+              <div className="logo-item">
+                <div className="logo-image-wrapper">
+                  <img src="/images/logo-imsa.png" alt="IMSA" className="logo-image" />
+                </div>
+                <p className="logo-name">IMSA</p>
+                <p className="logo-desc">Integrated Marketing Services Agency</p>
+              </div>
+
+              <div className="logo-item">
+                <div className="logo-image-wrapper">
+                  <img src="/images/logo-nobody.png" alt="Nobody" className="logo-image" />
+                </div>
+                <p className="logo-name">Nobody</p>
+                <p className="logo-desc">Сервис отслеживания цифрового следа</p>
+              </div>
+
+              <div className="logo-item">
+                <div className="logo-image-wrapper">
+                  <img src="/images/logo-pulse.png" alt="Pulse" className="logo-image" />
+                </div>
+                <p className="logo-name">Pulse</p>
+                <p className="logo-desc">Цифровой банк</p>
+              </div>
+
+              <div className="logo-item logo-item-soon">
+                <div className="logo-image-wrapper soon-wrapper">
+                  <p className="soon-text">скоро...</p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* АЙДЕНТИКА */}
+          <section id="identity" className="section">
+            <div className="section-divider">
+              <div className="divider-line"></div>
+              <h2 className="section-title">айдентика</h2>
+            </div>
+
+            <div className="case">
+              <div className="case-info">
+                <span className="case-label">(Кейс 1)</span>
+                <h3 className="case-name">Ребрендинг IMSA</h3>
+                <p className="case-subtitle">Integrated Marketing Services Agency</p>
+                <p className="case-text">
+                  Разработал новую концепцию «Idea → Mission → Solution → Aim», заложил
+                  символизм через путь, который проходит команда вместе с клиентом
+                  в каждом проекте
+                </p>
+                <p className="case-text">
+                  Провел предпроектный анализ, собрал воедино ключевые идеи агентства
+                  и позиционирование, фирменный стиль стал выглядеть современнее
+                  на фоне конкурентов
+                </p>
+                <a href="#" target="_blank" rel="noopener noreferrer" className="btn-blue">Брендбук</a>
+              </div>
+              <div className="case-image">
+                <img src="/images/case-imsa.jpg" alt="Кейс IMSA" className="case-img" />
+              </div>
+            </div>
+
+            <div className="case">
+              <div className="case-info">
+                <span className="case-label">(Кейс 2)</span>
+                <h3 className="case-name">Тюмень</h3>
+                <p className="case-subtitle">Айдентика города</p>
+                <p className="case-text">
+                  В основу дизайн-решения была положена идея блоков, это позволило
+                  разработать систему-конструктор и развить её на всех носителях.
+                  Образ получился ярким, гибким и динамичным, что позволило раскрыть
+                  облик города во всех красках и переосмыслить исторические символы города.
+                </p>
+                <p className="case-text">
+                  Провел предпроектный анализ, выявил ключевые образы, цветовые коды
+                </p>
+                <a href="https://dprofile.ru" target="_blank" rel="noopener noreferrer" className="btn-blue">Кейс на Dprofile</a>
+              </div>
+              <div className="case-image">
+                <img src="/images/case-tyumen.jpg" alt="Кейс Тюмень" className="case-img" />
+              </div>
+            </div>
+
+            <div className="case">
+              <div className="case-info">
+                <span className="case-label">(Кейс 3)</span>
+                <h3 className="case-name">Ильинская Слобода</h3>
+                <p className="case-subtitle">Территориальный брендинг</p>
+                <p className="case-text">
+                  Разработан территориальный брендинг Ильинской Слободы, на основе
+                  исторических, архитектурных и природных достопримечательностей.
+                </p>
+                <p className="case-text">
+                  Создана навигация и сувенирная продукция. Геральдика лаконично
+                  вписалась в контекст территории с её множеством символов и смыслов.
+                </p>
+                <a href="https://dprofile.ru" target="_blank" rel="noopener noreferrer" className="btn-blue">Кейс на Dprofile</a>
+              </div>
+              <div className="case-image">
+                <img src="/images/case-sloboda.jpg" alt="Кейс Ильинская Слобода" className="case-img" />
+              </div>
+            </div>
+
+            <div className="case">
+              <div className="case-info">
+                <span className="case-label">(Кейс 4)</span>
+                <h3 className="case-name">Рубеж</h3>
+                <p className="case-subtitle">Айдентика отряда</p>
+                <p className="case-text">
+                  В основе идеи лежит линия — рубеж, проходя который дети растут
+                  в своих навыках, учатся помогать и набираются дисциплине. Эта идея
+                  заложена в знаке, где из грубого, текст переходит в ровный и аккуратный
+                </p>
+                <p className="case-text">
+                  Провел предпроектный анализ, выявил ключевые образы, цветовые коды
+                </p>
+              </div>
+              <div className="case-image">
+                <img src="/images/case-rubezh.jpg" alt="Кейс Рубеж" className="case-img" />
+              </div>
+            </div>
+          </section>
+
+          {/* 3D */}
+          <section id="threed" className="section">
+            <div className="section-divider">
+              <div className="divider-line"></div>
+              <h2 className="section-title">3D</h2>
+            </div>
+            <p className="coming-soon-section">Раздел в разработке...</p>
+          </section>
+
+          {/* ГРАФИКА */}
+          <section id="graphics" className="section">
+            <div className="section-divider">
+              <div className="divider-line"></div>
+              <h2 className="section-title">графика</h2>
+            </div>
+            <p className="coming-soon-section">Раздел в разработке...</p>
+          </section>
+
+          {/* АНИМАЦИЯ */}
+          <section id="animation" className="section">
+            <div className="section-divider">
+              <div className="divider-line"></div>
+              <h2 className="section-title">анимация</h2>
+            </div>
+            <p className="coming-soon-section">Раздел в разработке...</p>
+          </section>
+
+        </div>
+      </div>
+    </>
+  );
+}

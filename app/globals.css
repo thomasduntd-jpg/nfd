@@ -1,0 +1,547 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter Tight', sans-serif;
+  color: #1a1a1a;
+  background-color: #000;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+
+/* =============================================
+   PAGE WRAPPER — чёрный фон
+   ============================================= */
+.page-wrapper {
+  width: 100%;
+  min-height: 100vh;
+  background: #000;
+  display: flex;
+  justify-content: center;
+  padding: 60px;
+}
+
+.main-frame {
+  width: 100%;
+  max-width: 1320px;
+  background: #fff;
+  border-radius: 10px;
+  padding: 60px;
+  overflow: hidden;
+}
+
+
+/* =============================================
+   КНОПКА НАВЕРХ — фиксированная
+   ============================================= */
+.scroll-top-btn {
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  z-index: 9999;
+  width: 56px;
+  height: 56px;
+  background: #ffffff;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s;
+}
+
+.scroll-top-btn:hover {
+  opacity: 0.7;
+}
+
+.scroll-top-icon {
+  width: 20px;
+  height: 20px;
+  filter: invert(1);
+}
+
+
+/* =============================================
+   HERO — описание, контакты, меню, фото
+   ============================================= */
+.hero {
+  margin-bottom: 60px;
+}
+
+.hero-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 60px;
+}
+
+.hero-description {
+  max-width: 700px;
+}
+
+.about-text {
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 1.35;
+  color: #1a1a1a;
+  margin-bottom: 32px;
+}
+
+.contacts {
+  display: flex;
+  gap: 32px;
+}
+
+.contact-link {
+  font-size: 16px;
+  color: #1a1a1a;
+  transition: opacity 0.2s;
+}
+
+.contact-link:hover {
+  opacity: 0.6;
+}
+
+.hero-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 40px;
+}
+
+.nav-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.nav-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 72px;
+  font-weight: 400;
+  line-height: 1.2;
+  color: #1a1a1a;
+  transition: opacity 0.2s;
+}
+
+.nav-item:hover {
+  opacity: 0.6;
+}
+
+.nav-arrow {
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+}
+
+.hero-photo {
+  flex-shrink: 0;
+}
+
+.photo-img {
+  width: 320px;
+  height: auto;
+  object-fit: cover;
+}
+
+
+/* =============================================
+   SECTION DIVIDER — линия + заголовок
+   ============================================= */
+.section {
+  margin-bottom: 60px;
+}
+
+.section-divider {
+  margin-bottom: 48px;
+}
+
+.divider-line {
+  width: 100%;
+  height: 2px;
+  background: #d4d4d4;
+  margin-bottom: 0px;
+}
+
+.section-title {
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 1.3;
+  color: #d4d4d4;
+}
+
+
+/* =============================================
+   ЛОГО-СЕТКА
+   ============================================= */
+.logo-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 48px 32px;
+}
+
+.logo-item {
+  text-align: center;
+}
+
+.logo-image-wrapper {
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.logo-image {
+  max-width: 80%;
+  max-height: 80%;
+  object-fit: contain;
+}
+
+.logo-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 4px;
+  line-height: 1.3;
+}
+
+.logo-desc {
+  font-size: 14px;
+  color: #888;
+  line-height: 1.4;
+  margin-bottom: 12px;
+}
+
+.logo-item-soon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.soon-wrapper {
+  background: none;
+}
+
+.soon-text {
+  font-size: 16px;
+  color: #bbb;
+  font-weight: 400;
+}
+
+
+/* =============================================
+   КНОПКА СИНЯЯ
+   ============================================= */
+.btn-blue {
+  display: inline-block;
+  padding: 10px 20px;
+  background: #2563EB;
+  color: #fff;
+  border-radius: 50px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background 0.2s;
+  line-height: 1.3;
+}
+
+.btn-blue:hover {
+  background: #1D4ED8;
+}
+
+
+/* =============================================
+   КЕЙСЫ АЙДЕНТИКА
+   ============================================= */
+.case {
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+  margin-bottom: 64px;
+}
+
+.case:last-child {
+  margin-bottom: 0;
+}
+
+.case-info {
+  flex: 0 0 40%;
+  max-width: 440px;
+}
+
+.case-label {
+  display: block;
+  font-size: 14px;
+  font-weight: 400;
+  font-style: italic;
+  color: #1a1a1a;
+  margin-bottom: 8px;
+}
+
+.case-name {
+  font-size: 32px;
+  font-weight: 800;
+  line-height: 1.15;
+  color: #1a1a1a;
+  margin-bottom: 6px;
+}
+
+.case-subtitle {
+  font-size: 16px;
+  font-weight: 400;
+  color: #999;
+  margin-bottom: 24px;
+  line-height: 1.4;
+}
+
+.case-text {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.45;
+  color: #1a1a1a;
+  margin-bottom: 20px;
+}
+
+.case-info .btn-blue {
+  margin-top: 8px;
+}
+
+.case-image {
+  flex: 1;
+  min-width: 0;
+}
+
+.case-img {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+  object-fit: cover;
+}
+
+
+/* =============================================
+   ЗАГЛУШКА
+   ============================================= */
+.coming-soon-section {
+  font-size: 18px;
+  color: #bbb;
+  padding: 60px 0;
+}
+
+
+/* =============================================
+   АДАПТИВ — ПЛАНШЕТ (1024px)
+   ============================================= */
+@media (max-width: 1024px) {
+  .page-wrapper {
+    padding: 40px;
+  }
+
+  .main-frame {
+    padding: 40px;
+  }
+
+  .about-text {
+    font-size: 20px;
+  }
+
+  .nav-item {
+    font-size: 32px;
+  }
+
+  .nav-arrow {
+    width: 22px;
+    height: 22px;
+  }
+
+  .photo-img {
+    width: 260px;
+  }
+
+  .logo-grid {
+    gap: 40px 24px;
+  }
+
+  .case {
+    gap: 32px;
+  }
+
+  .case-name {
+    font-size: 26px;
+  }
+
+  .case-text {
+    font-size: 15px;
+  }
+}
+
+
+/* =============================================
+   АДАПТИВ — МАЛЕНЬКИЙ ПЛАНШЕТ (768px)
+   ============================================= */
+@media (max-width: 768px) {
+  .page-wrapper {
+    padding: 24px;
+  }
+
+  .main-frame {
+    padding: 32px 28px;
+  }
+
+  .about-text {
+    font-size: 18px;
+    margin-bottom: 24px;
+  }
+
+  .contacts {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .hero-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 32px;
+  }
+
+  .nav-item {
+    font-size: 28px;
+  }
+
+  .nav-arrow {
+    width: 20px;
+    height: 20px;
+  }
+
+  .photo-img {
+    width: 100%;
+    max-width: 400px;
+  }
+
+  .logo-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px 20px;
+  }
+
+  .case {
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .case-info {
+    flex: none;
+    max-width: 100%;
+  }
+
+  .case-name {
+    font-size: 28px;
+  }
+
+  .section-title {
+    font-size: 24px;
+  }
+
+  .scroll-top-btn {
+    right: 24px;
+    bottom: 24px;
+    width: 48px;
+    height: 48px;
+  }
+}
+
+
+/* =============================================
+   АДАПТИВ — МОБИЛКА (480px)
+   ============================================= */
+@media (max-width: 480px) {
+  .page-wrapper {
+    padding: 12px;
+  }
+
+  .main-frame {
+    padding: 24px 20px;
+    border-radius: 8px;
+  }
+
+  .hero-top {
+    margin-bottom: 40px;
+  }
+
+  .about-text {
+    font-size: 16px;
+    line-height: 1.4;
+    margin-bottom: 20px;
+  }
+
+  .contact-link {
+    font-size: 14px;
+  }
+
+  .nav-item {
+    font-size: 24px;
+  }
+
+  .nav-arrow {
+    width: 18px;
+    height: 18px;
+  }
+
+  .photo-img {
+    width: 100%;
+  }
+
+  .logo-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .section-title {
+    font-size: 22px;
+  }
+
+  .case-name {
+    font-size: 24px;
+  }
+
+  .case-text {
+    font-size: 14px;
+  }
+
+  .case-subtitle {
+    font-size: 14px;
+  }
+
+  .btn-blue {
+    font-size: 13px;
+    padding: 8px 16px;
+  }
+
+  .scroll-top-btn {
+    right: 16px;
+    bottom: 16px;
+    width: 44px;
+    height: 44px;
+  }
+}
