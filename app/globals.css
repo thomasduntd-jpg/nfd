@@ -28,7 +28,7 @@ img {
 
 
 /* =============================================
-   PAGE WRAPPER — чёрный фон
+   PAGE WRAPPER
    ============================================= */
 .page-wrapper {
   width: 100%;
@@ -50,7 +50,7 @@ img {
 
 
 /* =============================================
-   КНОПКА НАВЕРХ — фиксированная
+   КНОПКА НАВЕРХ
    ============================================= */
 .scroll-top-btn {
   position: fixed;
@@ -59,29 +59,29 @@ img {
   z-index: 9999;
   width: 56px;
   height: 56px;
-  background: #ffffff;
+  background: #8DFB27;
   border: none;
   border-radius: 50%;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: opacity 0.2s;
+  transition: transform 0.2s, opacity 0.2s;
+  box-shadow: 0 4px 16px rgba(141, 251, 39, 0.4);
 }
 
 .scroll-top-btn:hover {
-  opacity: 0.7;
+  transform: scale(1.1);
 }
 
-.scroll-top-icon {
-  width: 20px;
-  height: 20px;
-  filter: invert(1);
+.scroll-top-btn svg {
+  width: 24px;
+  height: 24px;
 }
 
 
 /* =============================================
-   HERO — описание, контакты, меню, фото
+   HERO
    ============================================= */
 .hero {
   margin-bottom: 60px;
@@ -95,13 +95,13 @@ img {
 }
 
 .hero-description {
-  max-width: 700px;
+  max-width: 1000px;
 }
 
 .about-text {
-  font-size: 24px;
-  font-weight: 500;
-  line-height: 1.35;
+  font-size: 30px;
+  font-weight: 600;
+  line-height: 1.2;
   color: #1a1a1a;
   margin-bottom: 32px;
 }
@@ -167,7 +167,7 @@ img {
 
 
 /* =============================================
-   SECTION DIVIDER — линия + заголовок
+   SECTION DIVIDER
    ============================================= */
 .section {
   margin-bottom: 60px;
@@ -179,7 +179,7 @@ img {
 
 .divider-line {
   width: 100%;
-  height: 2px;
+  height: 1pt;
   background: #d4d4d4;
   margin-bottom: 0px;
 }
@@ -273,7 +273,7 @@ img {
 
 
 /* =============================================
-   КЕЙСЫ АЙДЕНТИКА
+   КЕЙСЫ
    ============================================= */
 .case {
   display: flex;
@@ -352,6 +352,191 @@ img {
 
 
 /* =============================================
+   3D GALLERY — КОЛЛАЖ
+   ============================================= */
+.gallery3d-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: 1fr;
+  gap: 8px;
+}
+
+/* Делаем ячейки квадратными через aspect-ratio */
+.gallery3d-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 4px;
+  cursor: pointer;
+  aspect-ratio: 1 / 1;
+}
+
+/* Раскладка коллажа — разные размеры */
+/* Элемент 1: большой 2×2 */
+.gallery3d-item--1 {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+
+/* Элемент 2: обычный 1×1 */
+.gallery3d-item--2 {
+  grid-column: span 1;
+  grid-row: span 1;
+}
+
+/* Элемент 3: обычный 1×1 */
+.gallery3d-item--3 {
+  grid-column: span 1;
+  grid-row: span 1;
+}
+
+/* Элемент 4: обычный 1×1 */
+.gallery3d-item--4 {
+  grid-column: span 1;
+  grid-row: span 1;
+}
+
+/* Элемент 5: обычный 1×1 */
+.gallery3d-item--5 {
+  grid-column: span 1;
+  grid-row: span 1;
+}
+
+/* Элемент 6: большой 2×2 */
+.gallery3d-item--6 {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+
+/* Элемент 7: обычный 1×1 */
+.gallery3d-item--7 {
+  grid-column: span 1;
+  grid-row: span 1;
+}
+
+/* Элемент 8: обычный 1×1 */
+.gallery3d-item--8 {
+  grid-column: span 1;
+  grid-row: span 1;
+}
+
+/* Элемент 9: обычный 1×1 */
+.gallery3d-item--9 {
+  grid-column: span 1;
+  grid-row: span 1;
+}
+
+/* Элемент 10: обычный 1×1 */
+.gallery3d-item--10 {
+  grid-column: span 1;
+  grid-row: span 1;
+}
+
+.gallery3d-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+/* Десктоп: увеличение при наведении */
+@media (hover: hover) and (pointer: fine) {
+  .gallery3d-item:hover .gallery3d-img {
+    transform: scale(1.05);
+  }
+}
+
+
+/* =============================================
+   LIGHTBOX
+   ============================================= */
+.lightbox-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background: rgba(0, 0, 0, 0.92);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: lightbox-fadein 0.25s ease;
+}
+
+@keyframes lightbox-fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  z-index: 10001;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s;
+}
+
+.lightbox-close:hover {
+  opacity: 0.7;
+}
+
+.lightbox-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10001;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  border-radius: 50%;
+  width: 52px;
+  height: 52px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+
+.lightbox-nav:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.lightbox-nav--prev {
+  left: 24px;
+}
+
+.lightbox-nav--next {
+  right: 24px;
+}
+
+.lightbox-content {
+  max-width: 90vw;
+  max-height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lightbox-img {
+  max-width: 90vw;
+  max-height: 90vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 4px;
+}
+
+
+/* =============================================
    АДАПТИВ — ПЛАНШЕТ (1024px)
    ============================================= */
 @media (max-width: 1024px) {
@@ -394,6 +579,33 @@ img {
 
   .case-text {
     font-size: 15px;
+  }
+
+  .scroll-top-btn {
+    width: 50px;
+    height: 50px;
+    bottom: 32px;
+    right: 32px;
+  }
+
+  .scroll-top-btn svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .gallery3d-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+  }
+
+  .gallery3d-item--1 {
+    grid-column: span 2;
+    grid-row: span 2;
+  }
+
+  .gallery3d-item--6 {
+    grid-column: span 2;
+    grid-row: span 2;
   }
 }
 
@@ -464,10 +676,48 @@ img {
   }
 
   .scroll-top-btn {
-    right: 24px;
-    bottom: 24px;
     width: 48px;
     height: 48px;
+    bottom: 24px;
+    right: 24px;
+  }
+
+  .scroll-top-btn svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .gallery3d-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 4px;
+  }
+
+  .gallery3d-item--1 {
+    grid-column: span 2;
+    grid-row: span 2;
+  }
+
+  .gallery3d-item--6 {
+    grid-column: span 1;
+    grid-row: span 1;
+  }
+
+  .lightbox-nav {
+    width: 44px;
+    height: 44px;
+  }
+
+  .lightbox-nav--prev {
+    left: 12px;
+  }
+
+  .lightbox-nav--next {
+    right: 12px;
+  }
+
+  .lightbox-close {
+    top: 16px;
+    right: 16px;
   }
 }
 
@@ -512,9 +762,23 @@ img {
     width: 100%;
   }
 
+  /* Логотипы — 1 колонка, уменьшены в 2 раза */
   .logo-grid {
     grid-template-columns: 1fr;
     gap: 32px;
+  }
+
+  .logo-image-wrapper {
+    aspect-ratio: auto;
+    max-width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 12px;
+  }
+
+  .logo-image {
+    max-width: 100%;
+    max-height: 100%;
   }
 
   .section-title {
@@ -539,9 +803,58 @@ img {
   }
 
   .scroll-top-btn {
-    right: 16px;
-    bottom: 16px;
     width: 44px;
     height: 44px;
+    bottom: 16px;
+    right: 16px;
+    box-shadow: 0 2px 12px rgba(141, 251, 39, 0.3);
+  }
+
+  .scroll-top-btn svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .gallery3d-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3px;
+  }
+
+  .gallery3d-item--1 {
+    grid-column: span 2;
+    grid-row: span 2;
+  }
+
+  .gallery3d-item--6 {
+    grid-column: span 1;
+    grid-row: span 1;
+  }
+
+  .lightbox-nav {
+    width: 40px;
+    height: 40px;
+  }
+
+  .lightbox-nav--prev {
+    left: 8px;
+  }
+
+  .lightbox-nav--next {
+    right: 8px;
+  }
+
+  .lightbox-close {
+    top: 12px;
+    right: 12px;
+  }
+
+  .lightbox-close svg {
+    width: 28px;
+    height: 28px;
+  }
+
+  .lightbox-nav svg {
+    width: 22px;
+    height: 22px;
   }
 }

@@ -1,9 +1,9 @@
 import ScrollToTop from "./ScrollToTop";
+import Gallery3D from "./Gallery3D";
 
 export default function Home() {
   return (
     <>
-      {/* Кнопка наверх — ВЫНЕСЕНА наружу */}
       <ScrollToTop />
 
       <div className="page-wrapper">
@@ -14,8 +14,8 @@ export default function Home() {
             <div className="hero-top">
               <div className="hero-description">
                 <p className="about-text">
-                  Федосов Николай, графический дизайнер с навыками
-                  в разных сферах. Нахожу решения в айдентике, графике,
+                  Федосов Николай, графический дизайнер c&nbsp;навыками
+                  в&nbsp;разных сферах. Нахожу решения в айдентике, графике,
                   3D, визуализации, полиграфии, смм, анимации.
                 </p>
                 <div className="contacts">
@@ -248,7 +248,7 @@ export default function Home() {
               <div className="divider-line"></div>
               <h2 className="section-title">3D</h2>
             </div>
-            <p className="coming-soon-section">Раздел в разработке...</p>
+            <Gallery3D />
           </section>
 
           {/* ГРАФИКА */}
