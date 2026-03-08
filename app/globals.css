@@ -762,18 +762,18 @@ img {
     width: 100%;
   }
 
-  /* Логотипы — 1 колонка, уменьшены в 2 раза */
+  /* Логотипы — 1 колонка, одинаковый размер, больше отступы */
   .logo-grid {
     grid-template-columns: 1fr;
-    gap: 32px;
+    gap: 48px;
   }
 
   .logo-image-wrapper {
-    aspect-ratio: auto;
-    max-width: 50%;
+    aspect-ratio: 3 / 2;
+    max-width: 70%;
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: 12px;
+    margin-bottom: 14px;
   }
 
   .logo-image {
