@@ -35,6 +35,18 @@ export default function Home() {
                   >
                     whoseyournemy@yandex.ru
                   </a>
+                  <a
+                    href="https://www.behance.net/nickfedosdcc2b"
+                    className="contact-link"
+                  >
+                    behance
+                  </a>
+                  <a
+                    href="https://dprofile.ru/fedosovnikolai"
+                    className="contact-link"
+                  >
+                    dprofile
+                  </a>
                 </div>
               </div>
             </div>
@@ -148,7 +160,7 @@ export default function Home() {
 
               <div className="logo-item logo-item-soon">
                 <div className="logo-image-wrapper soon-wrapper">
-                  <p className="soon-text">еще работаю...</p>
+                  <p className="soon-text">в работе...</p>
                 </div>
               </div>
             </div>
@@ -168,12 +180,12 @@ export default function Home() {
                 <p className="case-subtitle">Integrated Marketing Services Agency</p>
                 <p className="case-text">
                   Разработал новую концепцию «Idea → Mission → Solution → Aim», заложил
-                  символизм через путь, который проходит команда вместе с клиентом
-                  в каждом проекте
+                  символизм через путь, который проходит команда вместе с&nbsp;клиентом
+                  в&nbsp;каждом проекте
                 </p>
                 <p className="case-text">
                   Провел предпроектный анализ, собрал воедино ключевые идеи агентства
-                  и позиционирование, фирменный стиль стал выглядеть современнее
+                  и&nbsp;позиционирование, фирменный стиль стал выглядеть современнее
                   на фоне конкурентов
                 </p>
                 <a href="#" target="_blank" rel="noopener noreferrer" className="btn-blue">Брендбук</a>
@@ -187,9 +199,9 @@ export default function Home() {
                 <h3 className="case-name">Тюмень</h3>
                 <p className="case-subtitle">Айдентика города</p>
                 <p className="case-text">
-                  В основу дизайн-решения была положена идея блоков, это позволило
-                  разработать систему-конструктор и развить её на всех носителях.
-                  Образ получился ярким, гибким и динамичным, что позволило раскрыть
+                  В основу дизайн-решения была положена идея блоков, это&nbsp;позволило
+                  разработать систему-конструктор и&nbsp;развить её на&nbsp;всех носителях.
+                  Образ получился ярким, гибким и динамичным, что&nbsp;позволило раскрыть
                   облик города во всех красках и переосмыслить исторические символы города.
                 </p>
                 <p className="case-text">
@@ -207,11 +219,11 @@ export default function Home() {
                 <p className="case-subtitle">Территориальный брендинг</p>
                 <p className="case-text">
                   Разработан территориальный брендинг Ильинской Слободы, на основе
-                  исторических, архитектурных и природных достопримечательностей.
+                  исторических, архитектурных и&nbsp;природных достопримечательностей.
                 </p>
                 <p className="case-text">
-                  Создана навигация и сувенирная продукция. Геральдика лаконично
-                  вписалась в контекст территории с её множеством символов и смыслов.
+                  Создана навигация и&nbsp;сувенирная продукция. Геральдика лаконично
+                  вписалась в контекст территории с&nbsp;её множеством символов и&nbsp;смыслов.
                 </p>
                 <a href="https://dprofile.ru" target="_blank" rel="noopener noreferrer" className="btn-blue">Кейс на Dprofile</a>
               </div>
@@ -225,8 +237,8 @@ export default function Home() {
                 <p className="case-subtitle">Айдентика отряда</p>
                 <p className="case-text">
                   В основе идеи лежит линия — рубеж, проходя который дети растут
-                  в своих навыках, учатся помогать и набираются дисциплине. Эта идея
-                  заложена в знаке, где из грубого, текст переходит в ровный и аккуратный
+                  в&nbsp;своих навыках, учатся помогать и&nbsp;набираются дисциплине. Эта&nbsp;идея
+                  заложена в&nbsp;знаке, где из&nbsp;грубого, текст переходит в&nbsp;ровный и&nbsp;аккуратный
                 </p>
                 <p className="case-text">
                   Провел предпроектный анализ, выявил ключевые образы, цветовые коды
