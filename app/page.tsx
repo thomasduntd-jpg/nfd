@@ -2,6 +2,7 @@ import ScrollToTop from "./ScrollToTop";
 import Gallery3D from "./Gallery3D";
 import CaseImage from "./CaseImage";
 import AnimationGallery from "./AnimationGallery";
+import HeroPhoto from "./HeroPhoto";
 
 export default function Home() {
   return (
@@ -75,13 +76,7 @@ export default function Home() {
                 </a>
               </nav>
 
-              <div className="hero-photo">
-                <img
-                  src="/images/nf.jpg"
-                  alt="Федосов Николай"
-                  className="photo-img"
-                />
-              </div>
+              <HeroPhoto />
             </div>
           </section>
 

@@ -167,6 +167,49 @@ img {
 
 
 /* =============================================
+   3D TILT PHOTO
+   ============================================= */
+.photo-tilt-wrapper {
+  position: relative;
+  width: 320px;
+  border-radius: 4px;
+  overflow: hidden;
+  transition: transform 0.15s ease-out;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.photo-tilt-wrapper .photo-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+.photo-glare {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: 4px;
+  transition: opacity 0.25s ease-out;
+  mix-blend-mode: soft-light;
+}
+
+/* Мобильные — отключить tilt */
+@media (hover: none) and (pointer: coarse) {
+  .photo-tilt-wrapper {
+    transition: none;
+    transform: none !important;
+  }
+
+  .photo-glare {
+    display: none;
+  }
+}
+
+
+/* =============================================
    SECTION DIVIDER
    ============================================= */
 .section {
@@ -582,6 +625,10 @@ img {
     width: 260px;
   }
 
+  .photo-tilt-wrapper {
+    width: 260px;
+  }
+
   .logo-grid {
     gap: 40px 24px;
   }
@@ -655,6 +702,11 @@ img {
   }
 
   .photo-img {
+    width: 100%;
+    max-width: 400px;
+  }
+
+  .photo-tilt-wrapper {
     width: 100%;
     max-width: 400px;
   }
@@ -781,6 +833,10 @@ img {
   }
 
   .photo-img {
+    width: 100%;
+  }
+
+  .photo-tilt-wrapper {
     width: 100%;
   }
 
