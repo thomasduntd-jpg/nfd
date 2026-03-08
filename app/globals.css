@@ -331,6 +331,12 @@ img {
 .case-image {
   flex: 1;
   min-width: 0;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.case-image:hover {
+  opacity: 0.85;
 }
 
 .case-img {
@@ -361,7 +367,6 @@ img {
   gap: 8px;
 }
 
-/* Делаем ячейки квадратными через aspect-ratio */
 .gallery3d-item {
   position: relative;
   overflow: hidden;
@@ -370,65 +375,26 @@ img {
   aspect-ratio: 1 / 1;
 }
 
-/* Раскладка коллажа — разные размеры */
-/* Элемент 1: большой 2×2 */
 .gallery3d-item--1 {
   grid-column: span 2;
   grid-row: span 2;
 }
 
-/* Элемент 2: обычный 1×1 */
-.gallery3d-item--2 {
-  grid-column: span 1;
-  grid-row: span 1;
-}
-
-/* Элемент 3: обычный 1×1 */
-.gallery3d-item--3 {
-  grid-column: span 1;
-  grid-row: span 1;
-}
-
-/* Элемент 4: обычный 1×1 */
-.gallery3d-item--4 {
-  grid-column: span 1;
-  grid-row: span 1;
-}
-
-/* Элемент 5: обычный 1×1 */
-.gallery3d-item--5 {
-  grid-column: span 1;
-  grid-row: span 1;
-}
-
-/* Элемент 6: большой 2×2 */
-.gallery3d-item--6 {
-  grid-column: span 2;
-  grid-row: span 2;
-}
-
-/* Элемент 7: обычный 1×1 */
-.gallery3d-item--7 {
-  grid-column: span 1;
-  grid-row: span 1;
-}
-
-/* Элемент 8: обычный 1×1 */
-.gallery3d-item--8 {
-  grid-column: span 1;
-  grid-row: span 1;
-}
-
-/* Элемент 9: обычный 1×1 */
-.gallery3d-item--9 {
-  grid-column: span 1;
-  grid-row: span 1;
-}
-
-/* Элемент 10: обычный 1×1 */
+.gallery3d-item--2,
+.gallery3d-item--3,
+.gallery3d-item--4,
+.gallery3d-item--5,
+.gallery3d-item--7,
+.gallery3d-item--8,
+.gallery3d-item--9,
 .gallery3d-item--10 {
   grid-column: span 1;
   grid-row: span 1;
+}
+
+.gallery3d-item--6 {
+  grid-column: span 2;
+  grid-row: span 2;
 }
 
 .gallery3d-img {
@@ -439,7 +405,6 @@ img {
   transition: transform 0.3s ease;
 }
 
-/* Десктоп: увеличение при наведении */
 @media (hover: hover) and (pointer: fine) {
   .gallery3d-item:hover .gallery3d-img {
     transform: scale(1.05);
@@ -462,12 +427,8 @@ img {
 }
 
 @keyframes lightbox-fadein {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 .lightbox-close {
@@ -518,6 +479,18 @@ img {
   right: 24px;
 }
 
+.lightbox-counter {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10001;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 14px;
+  font-weight: 500;
+  pointer-events: none;
+}
+
 .lightbox-content {
   max-width: 90vw;
   max-height: 90vh;
@@ -533,6 +506,12 @@ img {
   height: auto;
   object-fit: contain;
   border-radius: 4px;
+}
+
+/* Одиночная картинка — скрыть стрелки и счётчик */
+.lightbox-single .lightbox-nav,
+.lightbox-single .lightbox-counter {
+  display: none;
 }
 
 
@@ -596,16 +575,6 @@ img {
   .gallery3d-grid {
     grid-template-columns: repeat(3, 1fr);
     gap: 6px;
-  }
-
-  .gallery3d-item--1 {
-    grid-column: span 2;
-    grid-row: span 2;
-  }
-
-  .gallery3d-item--6 {
-    grid-column: span 2;
-    grid-row: span 2;
   }
 }
 
@@ -762,18 +731,17 @@ img {
     width: 100%;
   }
 
-  /* Логотипы — 1 колонка, одинаковый размер, больше отступы */
   .logo-grid {
     grid-template-columns: 1fr;
-    gap: 60px;
+    gap: 48px;
   }
 
   .logo-image-wrapper {
     aspect-ratio: auto;
-    max-width: 30%;
+    max-width: 40%;
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: 30px;
+    margin-bottom: 60px;
   }
 
   .logo-image {

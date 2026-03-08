@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback } from "react";
 import Image from "next/image";
+import Lightbox from "./Lightbox";
 
 const images = [
   { src: "/images/image-3d01.jpg", alt: "3D работа 01" },
@@ -27,20 +28,6 @@ export default function Gallery3D() {
     setActiveIndex(null);
   }, []);
 
-  useEffect(() => {
-    const handleKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") closeLightbox();
-    };
-    if (activeIndex !== null) {
-      document.addEventListener("keydown", handleKey);
-      document.body.style.overflow = "hidden";
-    }
-    return () => {
-      document.removeEventListener("keydown", handleKey);
-      document.body.style.overflow = "";
-    };
-  }, [activeIndex, closeLightbox]);
-
   return (
     <>
       <div className="gallery3d-grid">
@@ -61,37 +48,12 @@ export default function Gallery3D() {
         ))}
       </div>
 
-      {activeIndex !== null && (
-        <div className="lightbox-overlay" onClick={closeLightbox}>
-          <button
-            className="lightbox-close"
-            onClick={closeLightbox}
-            aria-label="Закрыть"
-          >
-            <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-              <path
-                d="M8 8L24 24M24 8L8 24"
-                stroke="#fff"
-                strokeWidth="2.5"
-                strokeLinecap="round"
-              />
-            </svg>
-          </button>
-          <div
-            className="lightbox-content"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <Image
-              src={images[activeIndex].src}
-              alt={images[activeIndex].alt}
-              width={1600}
-              height={1600}
-              className="lightbox-img"
-              priority
-            />
-          </div>
-        </div>
-      )}
+      <Lightbox
+        images={images}
+        activeIndex={activeIndex}
+        onClose={closeLightbox}
+        onChangeIndex={setActiveIndex}
+      />
     </>
   );
 }

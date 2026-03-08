@@ -1,5 +1,6 @@
 import ScrollToTop from "./ScrollToTop";
 import Gallery3D from "./Gallery3D";
+import CaseImage from "./CaseImage";
 
 export default function Home() {
   return (
@@ -176,9 +177,7 @@ export default function Home() {
                 </p>
                 <a href="#" target="_blank" rel="noopener noreferrer" className="btn-blue">Брендбук</a>
               </div>
-              <div className="case-image">
-                <img src="/images/case-imsa.jpg" alt="Кейс IMSA" className="case-img" />
-              </div>
+              <CaseImage src="/images/case-imsa.jpg" alt="Кейс IMSA" />
             </div>
 
             <div className="case">
@@ -197,9 +196,7 @@ export default function Home() {
                 </p>
                 <a href="https://dprofile.ru" target="_blank" rel="noopener noreferrer" className="btn-blue">Кейс на Dprofile</a>
               </div>
-              <div className="case-image">
-                <img src="/images/case-tyumen.jpg" alt="Кейс Тюмень" className="case-img" />
-              </div>
+              <CaseImage src="/images/case-tyumen.jpg" alt="Кейс Тюмень" />
             </div>
 
             <div className="case">
@@ -217,9 +214,7 @@ export default function Home() {
                 </p>
                 <a href="https://dprofile.ru" target="_blank" rel="noopener noreferrer" className="btn-blue">Кейс на Dprofile</a>
               </div>
-              <div className="case-image">
-                <img src="/images/case-sloboda.jpg" alt="Кейс Ильинская Слобода" className="case-img" />
-              </div>
+              <CaseImage src="/images/case-sloboda.jpg" alt="Кейс Ильинская Слобода" />
             </div>
 
             <div className="case">
@@ -236,9 +231,7 @@ export default function Home() {
                   Провел предпроектный анализ, выявил ключевые образы, цветовые коды
                 </p>
               </div>
-              <div className="case-image">
-                <img src="/images/case-rubezh.jpg" alt="Кейс Рубеж" className="case-img" />
-              </div>
+              <CaseImage src="/images/case-rubezh.jpg" alt="Кейс Рубеж" />
             </div>
           </section>
 
