@@ -1,4 +1,5 @@
 import "./globals.css";
+import CustomCursor from "./CustomCursor";
 
 export const metadata = {
   title: "Федосов Николай — дизайнер",
@@ -18,7 +19,10 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body>{children}</body>
+      <body>
+        <CustomCursor />
+        {children}
+      </body>
     </html>
   );
 }

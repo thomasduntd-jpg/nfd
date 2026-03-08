@@ -927,3 +927,41 @@ img {
   }
 }
 
+/* ===== КАСТОМНЫЙ КУРСОР ===== */
+
+* {
+  cursor: none !important;
+}
+
+.custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 99999;
+  will-change: transform;
+  transition: opacity 0.2s ease;
+}
+
+.custom-cursor-img {
+  display: block;
+  width: 60px;
+  height: 60px;
+  /* 
+    Точка клика:
+    translate(0, 0)         — левый верхний угол (для стрелки)
+    translate(-50%, -50%)   — центр (для кружка/крестика)
+  */
+  transform: translate(0, 0);
+}
+
+/* Мобильные — обычный курсор */
+@media (hover: none) and (pointer: coarse) {
+  * {
+    cursor: auto !important;
+  }
+
+  .custom-cursor {
+    display: none !important;
+  }
+}
