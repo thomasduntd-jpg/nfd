@@ -765,11 +765,11 @@ img {
   /* Логотипы — 1 колонка, одинаковый размер, больше отступы */
   .logo-grid {
     grid-template-columns: 1fr;
-    gap: 48px;
+    gap: 60px;
   }
 
   .logo-image-wrapper {
-    aspect-ratio: 3 / 2;
+    aspect-ratio: auto;
     max-width: 30%;
     margin-left: auto;
     margin-right: auto;
