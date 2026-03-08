@@ -83,7 +83,7 @@ export default function Lightbox({ images, activeIndex, onClose, onChangeIndex }
 
       {/* Десктопные стрелки по бокам */}
       <button
-        className="lightbox-nav lightbox-nav--prev lightbox-nav-desktop"
+        className="lightbox-nav-desktop lightbox-nav--prev"
         onClick={(e) => { e.stopPropagation(); goPrev(); }}
         aria-label="Предыдущая"
       >
@@ -93,7 +93,7 @@ export default function Lightbox({ images, activeIndex, onClose, onChangeIndex }
       </button>
 
       <button
-        className="lightbox-nav lightbox-nav--next lightbox-nav-desktop"
+        className="lightbox-nav-desktop lightbox-nav--next"
         onClick={(e) => { e.stopPropagation(); goNext(); }}
         aria-label="Следующая"
       >
@@ -102,48 +102,53 @@ export default function Lightbox({ images, activeIndex, onClose, onChangeIndex }
         </svg>
       </button>
 
-      {/* Центральная область: картинка + мобильная навигация снизу */}
-      <div className="lightbox-center" onClick={(e) => e.stopPropagation()}>
-        <div className="lightbox-content">
-          <Image
-            src={images[activeIndex].src}
-            alt={images[activeIndex].alt}
-            width={1600}
-            height={1600}
-            className="lightbox-img"
-            priority
-          />
+      {/* Десктопный счётчик — абсолютный, внизу экрана */}
+      {!isSingle && (
+        <div className="lightbox-counter-desktop">
+          {activeIndex + 1} / {images.length}
         </div>
+      )}
 
-        {/* Мобильная навигация под картинкой */}
-        {!isSingle && (
-          <div className="lightbox-bottom-nav">
-            <button
-              className="lightbox-bottom-btn"
-              onClick={(e) => { e.stopPropagation(); goPrev(); }}
-              aria-label="Предыдущая"
-            >
-              <svg width="24" height="24" viewBox="0 0 28 28" fill="none">
-                <path d="M18 4L8 14L18 24" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </button>
-
-            <span className="lightbox-counter">
-              {activeIndex + 1} / {images.length}
-            </span>
-
-            <button
-              className="lightbox-bottom-btn"
-              onClick={(e) => { e.stopPropagation(); goNext(); }}
-              aria-label="Следующая"
-            >
-              <svg width="24" height="24" viewBox="0 0 28 28" fill="none">
-                <path d="M10 4L20 14L10 24" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </button>
-          </div>
-        )}
+      {/* Картинка */}
+      <div className="lightbox-content" onClick={(e) => e.stopPropagation()}>
+        <Image
+          src={images[activeIndex].src}
+          alt={images[activeIndex].alt}
+          width={1600}
+          height={1600}
+          className="lightbox-img"
+          priority
+        />
       </div>
+
+      {/* Мобильная навигация под картинкой */}
+      {!isSingle && (
+        <div className="lightbox-bottom-nav" onClick={(e) => e.stopPropagation()}>
+          <button
+            className="lightbox-bottom-btn"
+            onClick={(e) => { e.stopPropagation(); goPrev(); }}
+            aria-label="Предыдущая"
+          >
+            <svg width="24" height="24" viewBox="0 0 28 28" fill="none">
+              <path d="M18 4L8 14L18 24" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </button>
+
+          <span className="lightbox-counter-mobile">
+            {activeIndex + 1} / {images.length}
+          </span>
+
+          <button
+            className="lightbox-bottom-btn"
+            onClick={(e) => { e.stopPropagation(); goNext(); }}
+            aria-label="Следующая"
+          >
+            <svg width="24" height="24" viewBox="0 0 28 28" fill="none">
+              <path d="M10 4L20 14L10 24" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </button>
+        </div>
+      )}
     </div>
   );
 }

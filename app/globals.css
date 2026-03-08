@@ -431,6 +431,7 @@ img {
   to { opacity: 1; }
 }
 
+/* Кнопка закрытия */
 .lightbox-close {
   position: absolute;
   top: 24px;
@@ -480,25 +481,32 @@ img {
   right: 24px;
 }
 
-/* Центральная область */
-.lightbox-center {
+/* Десктопный счётчик — абсолютный, внизу экрана */
+.lightbox-counter-desktop {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10001;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 14px;
+  font-weight: 500;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Картинка */
+.lightbox-content {
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
   max-width: 90vw;
   max-height: 90vh;
 }
 
-.lightbox-content {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 .lightbox-img {
   max-width: 90vw;
-  max-height: 85vh;
+  max-height: 90vh;
   width: auto;
   height: auto;
   object-fit: contain;
@@ -508,11 +516,6 @@ img {
 /* Мобильная навигация под картинкой — скрыта на десктопе */
 .lightbox-bottom-nav {
   display: none;
-  align-items: center;
-  justify-content: center;
-  gap: 32px;
-  margin-top: 20px;
-  padding: 8px 0;
 }
 
 .lightbox-bottom-btn {
@@ -533,8 +536,8 @@ img {
   background: rgba(255, 255, 255, 0.35);
 }
 
-/* Счётчик */
-.lightbox-counter {
+/* Мобильный счётчик — скрыт на десктопе */
+.lightbox-counter-mobile {
   color: rgba(255, 255, 255, 0.6);
   font-size: 14px;
   font-weight: 500;
@@ -544,8 +547,8 @@ img {
 
 /* Одиночная картинка — скрыть всю навигацию */
 .lightbox-single .lightbox-nav-desktop,
-.lightbox-single .lightbox-bottom-nav,
-.lightbox-single .lightbox-counter {
+.lightbox-single .lightbox-counter-desktop,
+.lightbox-single .lightbox-bottom-nav {
   display: none !important;
 }
 
@@ -711,8 +714,23 @@ img {
     display: none !important;
   }
 
+  .lightbox-counter-desktop {
+    display: none !important;
+  }
+
+  .lightbox-overlay {
+    flex-direction: column;
+    justify-content: center;
+    gap: 0;
+  }
+
   .lightbox-bottom-nav {
     display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+    margin-top: 20px;
+    padding: 8px 0;
   }
 
   .lightbox-img {
@@ -849,7 +867,7 @@ img {
     height: 20px;
   }
 
-  .lightbox-counter {
+  .lightbox-counter-mobile {
     font-size: 13px;
   }
 

@@ -26,7 +26,7 @@ export default function Home() {
                     rel="noopener noreferrer"
                     className="contact-link"
                   >
-                    телеграм
+                    @whoseyournemy
                   </a>
                   <a
                     href="mailto:whoseyournemy@yandex.ru"
