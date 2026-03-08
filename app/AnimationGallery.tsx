@@ -7,21 +7,13 @@ const videos = [
   },
   {
     title: "Анимация 2",
-    embedUrl: "https://www.youtube.com/embed/VIDEO_ID_2",
+    embedUrl: "https://kinescope.io/embed/rQ9zVUKSurT37Ztn7HKmWU",
   },
   {
     title: "Анимация 3",
-    embedUrl: "https://www.youtube.com/embed/VIDEO_ID_3",
+    embedUrl: "https://kinescope.io/embed/ojoXCfbfRykcX1GJHHWWRK",
   },
-  {
-    title: "Анимация 4",
-    embedUrl: "https://www.youtube.com/embed/VIDEO_ID_4",
-  },
-  {
-    title: "Анимация 3",
-    embedUrl: "https://www.youtube.com/embed/VIDEO_ID_5",
-  },
-
+  
 ];
 
 export default function AnimationGallery() {

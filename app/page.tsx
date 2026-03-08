@@ -148,7 +148,7 @@ export default function Home() {
 
               <div className="logo-item logo-item-soon">
                 <div className="logo-image-wrapper soon-wrapper">
-                  <p className="soon-text">скоро...</p>
+                  <p className="soon-text">еще работаю...</p>
                 </div>
               </div>
             </div>
