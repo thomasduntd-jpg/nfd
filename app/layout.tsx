@@ -1,5 +1,6 @@
 import "./globals.css";
 import CustomCursor from "./CustomCursor";
+import ScrollProgress from "./ScrollProgress";
 
 export const metadata = {
   title: "Федосов Николай — дизайнер",
@@ -21,6 +22,7 @@ export default function RootLayout({
       </head>
       <body>
         <CustomCursor />
+        <ScrollProgress />
         {children}
       </body>
     </html>

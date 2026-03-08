@@ -945,8 +945,8 @@ img {
 
 .custom-cursor-img {
   display: block;
-  width: 60px;
-  height: 60px;
+  width: 30px;
+  height: 30px;
   /* 
     Точка клика:
     translate(0, 0)         — левый верхний угол (для стрелки)
@@ -963,5 +963,75 @@ img {
 
   .custom-cursor {
     display: none !important;
+  }
+}
+
+/* ===== СКРЫТЬ СТАНДАРТНЫЙ СКРОЛЛБАР ===== */
+
+html {
+  scrollbar-width: none; /* Firefox */
+}
+
+html::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Edge */
+}
+
+/* ===== СКРЫТЬ СТАНДАРТНЫЙ СКРОЛЛБАР ===== */
+
+html {
+  scrollbar-width: none;
+}
+
+html::-webkit-scrollbar {
+  display: none;
+}
+
+/* ===== КАСТОМНАЯ ШКАЛА ПРОКРУТКИ ===== */
+
+.scroll-progress-track {
+  position: fixed;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 30vh;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 100px;
+  z-index: 9999;
+  cursor: pointer;
+  transition: width 0.3s ease, background 0.3s ease, opacity 0.3s ease;
+  user-select: none;
+}
+
+/* Увеличение при наведении и перетаскивании */
+.scroll-progress-track.scroll-active {
+  width: 16px;
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.scroll-progress-fill {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 100px;
+  transition: background 0.3s ease;
+  min-height: 4px;
+}
+
+.scroll-progress-track.scroll-active .scroll-progress-fill {
+  background: rgba(255, 255, 255, 0.85);
+}
+
+/* Мобильные — скрыть шкалу */
+@media (max-width: 768px) {
+  .scroll-progress-track {
+    display: none;
+  }
+
+  html {
+    scrollbar-width: auto;
+  }
+
+  html::-webkit-scrollbar {
+    display: block;
   }
 }
