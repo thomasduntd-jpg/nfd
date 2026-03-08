@@ -1,6 +1,7 @@
 import ScrollToTop from "./ScrollToTop";
 import Gallery3D from "./Gallery3D";
 import CaseImage from "./CaseImage";
+import AnimationGallery from "./AnimationGallery";
 
 export default function Home() {
   return (
@@ -235,15 +236,6 @@ export default function Home() {
             </div>
           </section>
 
-          {/* 3D */}
-          <section id="threed" className="section">
-            <div className="section-divider">
-              <div className="divider-line"></div>
-              <h2 className="section-title">3D</h2>
-            </div>
-            <Gallery3D />
-          </section>
-
           {/* ГРАФИКА */}
           <section id="graphics" className="section">
             <div className="section-divider">
@@ -253,14 +245,23 @@ export default function Home() {
             <p className="coming-soon-section">Раздел в разработке...</p>
           </section>
 
-          {/* АНИМАЦИЯ */}
-          <section id="animation" className="section">
+          {/* 3D */}
+          <section id="threed" className="section">
             <div className="section-divider">
               <div className="divider-line"></div>
-              <h2 className="section-title">анимация</h2>
+              <h2 className="section-title">3D</h2>
             </div>
-            <p className="coming-soon-section">Раздел в разработке...</p>
+            <Gallery3D />
           </section>
+
+          {/* АНИМАЦИЯ */}
+<section id="animation" className="section">
+  <div className="section-divider">
+    <div className="divider-line"></div>
+    <h2 className="section-title">анимация</h2>
+  </div>
+  <AnimationGallery />
+</section>
 
         </div>
       </div>
