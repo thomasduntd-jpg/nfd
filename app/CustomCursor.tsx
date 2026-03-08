@@ -70,13 +70,13 @@ export default function CustomCursor() {
       style={{ opacity: visible ? 1 : 0 }}
     >
       <img
-        src="/icons/cursor.svg"
+        src="/icons/Cursor.svg"
         alt=""
         className="custom-cursor-img"
         style={{ display: isPointer ? "none" : "block" }}
       />
       <img
-        src="/icons/pointer.svg"
+        src="/icons/Pointer.svg"
         alt=""
         className="custom-cursor-img"
         style={{ display: isPointer ? "block" : "none" }}
