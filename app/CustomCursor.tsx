@@ -4,82 +4,164 @@ import { useEffect, useRef, useState } from "react";
 
 export default function CustomCursor() {
   const cursorRef = useRef<HTMLDivElement>(null);
-  const [visible, setVisible] = useState(false);
+  
+  // Добавляем стейт для отслеживания наведения на кликабельные элементы
   const [isPointer, setIsPointer] = useState(false);
 
-  useEffect(() => {
-    if ("ontouchstart" in window) return;
+  // Позиции
+  const mouseX = useRef(0);
+  const mouseY = useRef(0);
+  const renderX = useRef(0);
+  const renderY = useRef(0);
 
+  // Углы
+  const angle = useRef(0);
+  const targetAngle = useRef(0);
+  const velocity = useRef(0);
+
+  // Буфер последних углов для усреднения (убирает дребезг)
+  const angleBuffer = useRef<number[]>([]);
+  const BUFFER_SIZE = 6;
+
+  const frameId = useRef(0);
+
+  useEffect(() => {
     const cursor = cursorRef.current;
     if (!cursor) return;
 
-    const onMouseMove = (e: MouseEvent) => {
-      cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
-      if (!visible) setVisible(true);
-    };
+    // Инициализация позиции
+    renderX.current = window.innerWidth / 2;
+    renderY.current = window.innerHeight / 2;
+    mouseX.current = renderX.current;
+    mouseY.current = renderY.current;
 
-    const onMouseLeave = () => setVisible(false);
-    const onMouseEnter = () => setVisible(true);
+    function normalizeAngleDiff(diff: number): number {
+      while (diff > 180) diff -= 360;
+      while (diff < -180) diff += 360;
+      return diff;
+    }
 
-    // Ховер на кликабельные элементы и изображения
-    const onEnterPointer = () => setIsPointer(true);
-    const onLeavePointer = () => setIsPointer(false);
+    // Усреднение угла из буфера (circular mean)
+    function averageAngles(angles: number[]): number {
+      if (angles.length === 0) return 0;
+      let sinSum = 0;
+      let cosSum = 0;
+      for (const a of angles) {
+        const rad = (a * Math.PI) / 180;
+        sinSum += Math.sin(rad);
+        cosSum += Math.cos(rad);
+      }
+      return Math.atan2(sinSum / angles.length, cosSum / angles.length) * (180 / Math.PI);
+    }
 
-    const SELECTOR = "a, button, input, textarea, select, img, video, [role='button'], .clickable";
+    let prevMoveX = mouseX.current;
+    let prevMoveY = mouseY.current;
 
-    const addListeners = () => {
-      document.querySelectorAll(SELECTOR).forEach((el) => {
-        el.addEventListener("mouseenter", onEnterPointer);
-        el.addEventListener("mouseleave", onLeavePointer);
-      });
-    };
+    function handleMouseMove(e: MouseEvent) {
+      mouseX.current = e.clientX;
+      mouseY.current = e.clientY;
 
-    const removeListeners = () => {
-      document.querySelectorAll(SELECTOR).forEach((el) => {
-        el.removeEventListener("mouseenter", onEnterPointer);
-        el.removeEventListener("mouseleave", onLeavePointer);
-      });
-    };
+      const dx = e.clientX - prevMoveX;
+      const dy = e.clientY - prevMoveY;
+      const dist = Math.hypot(dx, dy);
 
-    document.addEventListener("mousemove", onMouseMove);
-    document.addEventListener("mouseleave", onMouseLeave);
-    document.addEventListener("mouseenter", onMouseEnter);
-    addListeners();
+      // Порог — игнорируем микро-движения
+      if (dist > 6) {
+        // Сырой угол направления
+        // +90 потому что SVG курсор смотрит ВВЕРХ
+        const rawAngle = Math.atan2(dy, dx) * (180 / Math.PI) + 90;
 
-    // Следить за изменениями DOM
-    const observer = new MutationObserver(() => {
-      addListeners();
-    });
-    observer.observe(document.body, { childList: true, subtree: true });
+        // Добавляем в буфер
+        angleBuffer.current.push(rawAngle);
+        if (angleBuffer.current.length > BUFFER_SIZE) {
+          angleBuffer.current.shift();
+        }
+
+        // Усреднённый угол — очень плавный
+        targetAngle.current = averageAngles(angleBuffer.current);
+
+        prevMoveX = e.clientX;
+        prevMoveY = e.clientY;
+      }
+    }
+
+    // --- ФУНКЦИЯ ДЛЯ СМЕНЫ КУРСОРА ---
+    function handleMouseOver(e: MouseEvent) {
+      const target = e.target as HTMLElement;
+
+      // Ищем ближайший родительский элемент, который является кликабельным
+      // Сюда включены теги <a>, <button>, а также ваши кастомные классы
+      const clickableElement = target.closest(
+        'a, button, input, textarea, select, [role="button"], .gallery3d-item, .case-image, .scroll-progress-track'
+      );
+
+      // Отдельно проверяем подложку лайтбокса (она закрывает модалку при клике, но картинка внутри нее — нет)
+      const isLightboxOverlay = target.classList.contains('lightbox-overlay');
+
+      if (clickableElement || isLightboxOverlay) {
+        setIsPointer(true);
+      } else {
+        setIsPointer(false);
+      }
+    }
+
+    function animate() {
+      if (!cursor) return;
+
+      // ---- Плавное следование позиции ----
+      const posSmooth = 0.12;
+      renderX.current += (mouseX.current - renderX.current) * posSmooth;
+      renderY.current += (mouseY.current - renderY.current) * posSmooth;
+
+      // ---- Пружинный поворот с инерцией ----
+      const diff = normalizeAngleDiff(targetAngle.current - angle.current);
+
+      const stiffness = 0.04;   // жёсткость
+      const damping = 0.65;     // затухание
+
+      velocity.current += diff * stiffness;
+      velocity.current *= damping;
+      angle.current += velocity.current;
+
+      // Применяем
+      cursor.style.left = `${renderX.current}px`;
+      cursor.style.top = `${renderY.current}px`;
+      cursor.style.transform = `translate(-50%, -50%) rotate(${angle.current}deg)`;
+
+      frameId.current = requestAnimationFrame(animate);
+    }
+
+    function handleMouseEnter() {
+      if (cursor) cursor.style.opacity = "1";
+    }
+
+    function handleMouseLeave() {
+      if (cursor) cursor.style.opacity = "0";
+    }
+
+    document.addEventListener("mousemove", handleMouseMove);
+    document.addEventListener("mouseover", handleMouseOver); // Слушаем наведение
+    document.addEventListener("mouseenter", handleMouseEnter);
+    document.addEventListener("mouseleave", handleMouseLeave);
+    frameId.current = requestAnimationFrame(animate);
 
     return () => {
-      document.removeEventListener("mousemove", onMouseMove);
-      document.removeEventListener("mouseleave", onMouseLeave);
-      document.removeEventListener("mouseenter", onMouseEnter);
-      removeListeners();
-      observer.disconnect();
+      document.removeEventListener("mousemove", handleMouseMove);
+      document.removeEventListener("mouseover", handleMouseOver); // Удаляем слушатель
+      document.removeEventListener("mouseenter", handleMouseEnter);
+      document.removeEventListener("mouseleave", handleMouseLeave);
+      cancelAnimationFrame(frameId.current);
     };
-  }, [visible]);
-
-  if (typeof window !== "undefined" && "ontouchstart" in window) return null;
+  }, []);
 
   return (
-    <div
-      ref={cursorRef}
-      className="custom-cursor"
-      style={{ opacity: visible ? 1 : 0 }}
-    >
+    <div ref={cursorRef} className="custom-cursor">
       <img
-        src="/icons/Cursor.svg"
-        alt=""
+        // В зависимости от стейта подгружаем нужную SVG иконку из папки public
+        src={isPointer ? "/icons/pointer.svg" : "/icons/cursor.svg"}
+        alt="cursor"
         className="custom-cursor-img"
-        style={{ display: isPointer ? "none" : "block" }}
-      />
-      <img
-        src="/icons/Pointer.svg"
-        alt=""
-        className="custom-cursor-img"
-        style={{ display: isPointer ? "block" : "none" }}
+        draggable={false}
       />
     </div>
   );

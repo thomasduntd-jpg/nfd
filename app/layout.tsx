@@ -1,10 +1,19 @@
+import type { Metadata } from "next";
+import { Inter_Tight } from "next/font/google";
 import "./globals.css";
 import CustomCursor from "./CustomCursor";
 import ScrollProgress from "./ScrollProgress";
+import LoadingScreen from "./LoadingScreen";
 
-export const metadata = {
-  title: "Федосов Николай — дизайнер",
-  description: "Портфолио графического дизайнера",
+const interTight = Inter_Tight({
+  subsets: ["latin", "cyrillic"],
+  weight: ["400", "500", "600", "700", "800"],
+  display: "swap",
+});
+
+export const metadata: Metadata = {
+  title: "Федосов Николай — Портфолио",
+  description: "Графический дизайнер. Айдентика, графика, 3D, анимация.",
 };
 
 export default function RootLayout({
@@ -14,13 +23,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ru">
-      <head>
-        <link
-          href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&display=swap"
-          rel="stylesheet"
-        />
-      </head>
-      <body>
+      <body className={interTight.className}>
+        <LoadingScreen />
         <CustomCursor />
         <ScrollProgress />
         {children}

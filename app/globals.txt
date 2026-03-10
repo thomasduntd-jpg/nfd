@@ -1,3 +1,6 @@
+/* =============================================
+   RESET
+   ============================================= */
 * {
   margin: 0;
   padding: 0;
@@ -6,6 +9,11 @@
 
 html {
   scroll-behavior: smooth;
+  scrollbar-width: none;
+}
+
+html::-webkit-scrollbar {
+  display: none;
 }
 
 body {
@@ -163,6 +171,48 @@ img {
   width: 320px;
   height: auto;
   object-fit: cover;
+}
+
+
+/* =============================================
+   3D TILT PHOTO
+   ============================================= */
+.photo-tilt-wrapper {
+  position: relative;
+  width: 320px;
+  border-radius: 4px;
+  overflow: hidden;
+  transition: transform 0.15s ease-out;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.photo-tilt-wrapper .photo-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+.photo-glare {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: 4px;
+  transition: opacity 0.25s ease-out;
+  mix-blend-mode: soft-light;
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .photo-tilt-wrapper {
+    transition: none;
+    transform: none !important;
+  }
+
+  .photo-glare {
+    display: none;
+  }
 }
 
 
@@ -431,7 +481,6 @@ img {
   to { opacity: 1; }
 }
 
-/* Кнопка закрытия */
 .lightbox-close {
   position: absolute;
   top: 24px;
@@ -451,7 +500,6 @@ img {
   opacity: 0.7;
 }
 
-/* Десктопные стрелки по бокам */
 .lightbox-nav-desktop {
   position: absolute;
   top: 50%;
@@ -481,7 +529,6 @@ img {
   right: 24px;
 }
 
-/* Десктопный счётчик — абсолютный, внизу экрана */
 .lightbox-counter-desktop {
   position: absolute;
   bottom: 10px;
@@ -495,7 +542,6 @@ img {
   user-select: none;
 }
 
-/* Картинка */
 .lightbox-content {
   display: flex;
   align-items: center;
@@ -513,7 +559,6 @@ img {
   border-radius: 4px;
 }
 
-/* Мобильная навигация под картинкой — скрыта на десктопе */
 .lightbox-bottom-nav {
   display: none;
 }
@@ -536,7 +581,6 @@ img {
   background: rgba(255, 255, 255, 0.35);
 }
 
-/* Мобильный счётчик — скрыт на десктопе */
 .lightbox-counter-mobile {
   color: rgba(255, 255, 255, 0.6);
   font-size: 14px;
@@ -545,11 +589,118 @@ img {
   user-select: none;
 }
 
-/* Одиночная картинка — скрыть всю навигацию */
 .lightbox-single .lightbox-nav-desktop,
 .lightbox-single .lightbox-counter-desktop,
 .lightbox-single .lightbox-bottom-nav {
   display: none !important;
+}
+
+
+/* =============================================
+   АНИМАЦИЯ (VIDEO GRID)
+   ============================================= */
+.animation-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  width: 100%;
+}
+
+.animation-item {
+  width: 100%;
+}
+
+.animation-video-wrapper {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
+  border-radius: 12px;
+  background: #1a1a1a;
+}
+
+.animation-video-wrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 12px;
+}
+
+
+/* ===== КАСТОМНЫЙ КУРСОР С ФИЗИКОЙ ===== */
+
+* {
+  cursor: none !important;
+}
+
+.custom-cursor {
+  position: fixed;
+  left: 0;
+  top: 0;
+  pointer-events: none;
+  z-index: 99999;
+  opacity: 0;
+  will-change: transform, left, top;
+  transition: opacity 0.3s ease;
+}
+
+.custom-cursor-img {
+  display: block;
+  width: 30px;
+  height: 30px;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* Мобильные — системный курсор */
+@media (hover: none) and (pointer: coarse) {
+  * {
+    cursor: auto !important;
+  }
+
+  .custom-cursor {
+    display: none !important;
+  }
+}
+
+/* =============================================
+   КАСТОМНАЯ ШКАЛА ПРОКРУТКИ
+   ============================================= */
+.scroll-progress-track {
+  position: fixed;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 30vh;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 100px;
+  z-index: 9999;
+  cursor: pointer;
+  transition: width 0.3s ease, background 0.3s ease, opacity 0.3s ease;
+  user-select: none;
+}
+
+.scroll-progress-track.scroll-active {
+  width: 16px;
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.scroll-progress-fill {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 100px;
+  transition: background 0.3s ease;
+  min-height: 4px;
+}
+
+.scroll-progress-track.scroll-active .scroll-progress-fill {
+  background: rgba(255, 255, 255, 0.85);
 }
 
 
@@ -579,6 +730,10 @@ img {
   }
 
   .photo-img {
+    width: 260px;
+  }
+
+  .photo-tilt-wrapper {
     width: 260px;
   }
 
@@ -659,6 +814,11 @@ img {
     max-width: 400px;
   }
 
+  .photo-tilt-wrapper {
+    width: 100%;
+    max-width: 400px;
+  }
+
   .logo-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 32px 20px;
@@ -709,7 +869,12 @@ img {
     grid-row: span 1;
   }
 
-  /* Лайтбокс: скрыть десктопные, показать мобильные */
+  .animation-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  /* Лайтбокс: мобильная навигация */
   .lightbox-nav-desktop {
     display: none !important;
   }
@@ -740,6 +905,19 @@ img {
   .lightbox-close {
     top: 16px;
     right: 16px;
+  }
+
+  /* Скрыть шкалу прокрутки */
+  .scroll-progress-track {
+    display: none;
+  }
+
+  html {
+    scrollbar-width: auto;
+  }
+
+  html::-webkit-scrollbar {
+    display: block;
   }
 }
 
@@ -781,6 +959,10 @@ img {
   }
 
   .photo-img {
+    width: 100%;
+  }
+
+  .photo-tilt-wrapper {
     width: 100%;
   }
 
@@ -851,7 +1033,6 @@ img {
     grid-row: span 1;
   }
 
-  /* Лайтбокс мобилка */
   .lightbox-bottom-nav {
     gap: 24px;
     margin-top: 16px;
@@ -886,152 +1067,18 @@ img {
   }
 }
 
-/* ===== АНИМАЦИЯ (VIDEO GRID) ===== */
 
-.animation-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-  width: 100%;
-}
-
-.animation-item {
-  width: 100%;
-}
-
-.animation-video-wrapper {
-  position: relative;
-  width: 100%;
-  padding-bottom: 56.25%; /* 16:9 */
-  height: 0;
-  overflow: hidden;
-  border-radius: 12px;
-  background: #1a1a1a;
-}
-
-.animation-video-wrapper iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border: none;
-  border-radius: 12px;
-}
-
-/* Мобильная версия — 1 видео в ряд */
-@media (max-width: 768px) {
-  .animation-grid {
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
-}
-
-/* ===== КАСТОМНЫЙ КУРСОР ===== */
-
-* {
-  cursor: none !important;
-}
-
-.custom-cursor {
-  position: fixed;
-  top: 0;
-  left: 0;
-  pointer-events: none;
-  z-index: 99999;
-  will-change: transform;
-  transition: opacity 0.2s ease;
-}
-
-.custom-cursor-img {
-  display: block;
-  width: 30px;
-  height: 30px;
-  /* 
-    Точка клика:
-    translate(0, 0)         — левый верхний угол (для стрелки)
-    translate(-50%, -50%)   — центр (для кружка/крестика)
-  */
-  transform: translate(0, 0);
-}
-
-/* Мобильные — обычный курсор */
+/* =============================================
+   МОБИЛЬНЫЕ — СИСТЕМНЫЙ КУРСОР
+   ============================================= */
 @media (hover: none) and (pointer: coarse) {
-  * {
+  *,
+  *::before,
+  *::after {
     cursor: auto !important;
   }
 
   .custom-cursor {
     display: none !important;
-  }
-}
-
-/* ===== СКРЫТЬ СТАНДАРТНЫЙ СКРОЛЛБАР ===== */
-
-html {
-  scrollbar-width: none; /* Firefox */
-}
-
-html::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Edge */
-}
-
-/* ===== СКРЫТЬ СТАНДАРТНЫЙ СКРОЛЛБАР ===== */
-
-html {
-  scrollbar-width: none;
-}
-
-html::-webkit-scrollbar {
-  display: none;
-}
-
-/* ===== КАСТОМНАЯ ШКАЛА ПРОКРУТКИ ===== */
-
-.scroll-progress-track {
-  position: fixed;
-  top: 50%;
-  right: 20px;
-  transform: translateY(-50%);
-  width: 8px;
-  height: 30vh;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 100px;
-  z-index: 9999;
-  cursor: pointer;
-  transition: width 0.3s ease, background 0.3s ease, opacity 0.3s ease;
-  user-select: none;
-}
-
-/* Увеличение при наведении и перетаскивании */
-.scroll-progress-track.scroll-active {
-  width: 16px;
-  background: rgba(255, 255, 255, 0.18);
-}
-
-.scroll-progress-fill {
-  width: 100%;
-  background: rgba(255, 255, 255, 0.6);
-  border-radius: 100px;
-  transition: background 0.3s ease;
-  min-height: 4px;
-}
-
-.scroll-progress-track.scroll-active .scroll-progress-fill {
-  background: rgba(255, 255, 255, 0.85);
-}
-
-/* Мобильные — скрыть шкалу */
-@media (max-width: 768px) {
-  .scroll-progress-track {
-    display: none;
-  }
-
-  html {
-    scrollbar-width: auto;
-  }
-
-  html::-webkit-scrollbar {
-    display: block;
   }
 }

@@ -1,3 +1,6 @@
+/* =============================================
+   RESET
+   ============================================= */
 * {
   margin: 0;
   padding: 0;
@@ -6,6 +9,11 @@
 
 html {
   scroll-behavior: smooth;
+  scrollbar-width: none;
+}
+
+html::-webkit-scrollbar {
+  display: none;
 }
 
 body {
@@ -196,7 +204,6 @@ img {
   mix-blend-mode: soft-light;
 }
 
-/* Мобильные — отключить tilt */
 @media (hover: none) and (pointer: coarse) {
   .photo-tilt-wrapper {
     transition: none;
@@ -474,7 +481,6 @@ img {
   to { opacity: 1; }
 }
 
-/* Кнопка закрытия */
 .lightbox-close {
   position: absolute;
   top: 24px;
@@ -494,7 +500,6 @@ img {
   opacity: 0.7;
 }
 
-/* Десктопные стрелки по бокам */
 .lightbox-nav-desktop {
   position: absolute;
   top: 50%;
@@ -524,7 +529,6 @@ img {
   right: 24px;
 }
 
-/* Десктопный счётчик — абсолютный, внизу экрана */
 .lightbox-counter-desktop {
   position: absolute;
   bottom: 10px;
@@ -538,7 +542,6 @@ img {
   user-select: none;
 }
 
-/* Картинка */
 .lightbox-content {
   display: flex;
   align-items: center;
@@ -556,7 +559,6 @@ img {
   border-radius: 4px;
 }
 
-/* Мобильная навигация под картинкой — скрыта на десктопе */
 .lightbox-bottom-nav {
   display: none;
 }
@@ -579,7 +581,6 @@ img {
   background: rgba(255, 255, 255, 0.35);
 }
 
-/* Мобильный счётчик — скрыт на десктопе */
 .lightbox-counter-mobile {
   color: rgba(255, 255, 255, 0.6);
   font-size: 14px;
@@ -588,11 +589,118 @@ img {
   user-select: none;
 }
 
-/* Одиночная картинка — скрыть всю навигацию */
 .lightbox-single .lightbox-nav-desktop,
 .lightbox-single .lightbox-counter-desktop,
 .lightbox-single .lightbox-bottom-nav {
   display: none !important;
+}
+
+
+/* =============================================
+   АНИМАЦИЯ (VIDEO GRID)
+   ============================================= */
+.animation-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  width: 100%;
+}
+
+.animation-item {
+  width: 100%;
+}
+
+.animation-video-wrapper {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
+  border-radius: 12px;
+  background: #1a1a1a;
+}
+
+.animation-video-wrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 12px;
+}
+
+
+/* ===== КАСТОМНЫЙ КУРСОР С ФИЗИКОЙ ===== */
+
+* {
+  cursor: none !important;
+}
+
+.custom-cursor {
+  position: fixed;
+  left: 0;
+  top: 0;
+  pointer-events: none;
+  z-index: 99999;
+  opacity: 0;
+  will-change: transform, left, top;
+  transition: opacity 0.3s ease;
+}
+
+.custom-cursor-img {
+  display: block;
+  width: 30px;
+  height: 30px;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* Мобильные — системный курсор */
+@media (hover: none) and (pointer: coarse) {
+  * {
+    cursor: auto !important;
+  }
+
+  .custom-cursor {
+    display: none !important;
+  }
+}
+
+/* =============================================
+   КАСТОМНАЯ ШКАЛА ПРОКРУТКИ
+   ============================================= */
+.scroll-progress-track {
+  position: fixed;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 30vh;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 100px;
+  z-index: 9999;
+  cursor: pointer;
+  transition: width 0.3s ease, background 0.3s ease, opacity 0.3s ease;
+  user-select: none;
+}
+
+.scroll-progress-track.scroll-active {
+  width: 16px;
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.scroll-progress-fill {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 100px;
+  transition: background 0.3s ease;
+  min-height: 4px;
+}
+
+.scroll-progress-track.scroll-active .scroll-progress-fill {
+  background: rgba(255, 255, 255, 0.85);
 }
 
 
@@ -761,7 +869,12 @@ img {
     grid-row: span 1;
   }
 
-  /* Лайтбокс: скрыть десктопные, показать мобильные */
+  .animation-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  /* Лайтбокс: мобильная навигация */
   .lightbox-nav-desktop {
     display: none !important;
   }
@@ -792,6 +905,19 @@ img {
   .lightbox-close {
     top: 16px;
     right: 16px;
+  }
+
+  /* Скрыть шкалу прокрутки */
+  .scroll-progress-track {
+    display: none;
+  }
+
+  html {
+    scrollbar-width: auto;
+  }
+
+  html::-webkit-scrollbar {
+    display: block;
   }
 }
 
@@ -907,7 +1033,6 @@ img {
     grid-row: span 1;
   }
 
-  /* Лайтбокс мобилка */
   .lightbox-bottom-nav {
     gap: 24px;
     margin-top: 16px;
@@ -942,78 +1067,14 @@ img {
   }
 }
 
-/* ===== АНИМАЦИЯ (VIDEO GRID) ===== */
 
-.animation-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-  width: 100%;
-}
-
-.animation-item {
-  width: 100%;
-}
-
-.animation-video-wrapper {
-  position: relative;
-  width: 100%;
-  padding-bottom: 56.25%; /* 16:9 */
-  height: 0;
-  overflow: hidden;
-  border-radius: 12px;
-  background: #1a1a1a;
-}
-
-.animation-video-wrapper iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border: none;
-  border-radius: 12px;
-}
-
-/* Мобильная версия — 1 видео в ряд */
-@media (max-width: 768px) {
-  .animation-grid {
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
-}
-
-/* ===== КАСТОМНЫЙ КУРСОР ===== */
-
-* {
-  cursor: none !important;
-}
-
-.custom-cursor {
-  position: fixed;
-  top: 0;
-  left: 0;
-  pointer-events: none;
-  z-index: 99999;
-  will-change: transform;
-  transition: opacity 0.2s ease;
-}
-
-.custom-cursor-img {
-  display: block;
-  width: 30px;
-  height: 30px;
-  /* 
-    Точка клика:
-    translate(0, 0)         — левый верхний угол (для стрелки)
-    translate(-50%, -50%)   — центр (для кружка/крестика)
-  */
-  transform: translate(0, 0);
-}
-
-/* Мобильные — обычный курсор */
+/* =============================================
+   МОБИЛЬНЫЕ — СИСТЕМНЫЙ КУРСОР
+   ============================================= */
 @media (hover: none) and (pointer: coarse) {
-  * {
+  *,
+  *::before,
+  *::after {
     cursor: auto !important;
   }
 
@@ -1022,72 +1083,120 @@ img {
   }
 }
 
-/* ===== СКРЫТЬ СТАНДАРТНЫЙ СКРОЛЛБАР ===== */
-
-html {
-  scrollbar-width: none; /* Firefox */
-}
-
-html::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Edge */
-}
-
-/* ===== СКРЫТЬ СТАНДАРТНЫЙ СКРОЛЛБАР ===== */
-
-html {
-  scrollbar-width: none;
-}
-
-html::-webkit-scrollbar {
-  display: none;
-}
-
-/* ===== КАСТОМНАЯ ШКАЛА ПРОКРУТКИ ===== */
-
-.scroll-progress-track {
+/* =============================================
+   ЭКРАН ЗАГРУЗКИ
+   ============================================= */
+.loading-screen {
   position: fixed;
-  top: 50%;
-  right: 20px;
-  transform: translateY(-50%);
-  width: 8px;
-  height: 30vh;
+  inset: 0;
+  z-index: 100000;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.5s ease;
+}
+
+.loading-screen--hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.loading-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: 30vw;
+}
+
+/* ---- Текст-фразы ---- */
+.loading-phrase-wrapper {
+  height: 24px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loading-phrase {
+  display: block;
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.6);
+  white-space: nowrap;
+  animation: loading-phrase-in 0.4s ease both;
+}
+
+@keyframes loading-phrase-in {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ---- Полоса загрузки (горизонтальная, стиль scroll-progress) ---- */
+.loading-bar-track {
+  width: 100%;
+  height: 8px;
   background: rgba(255, 255, 255, 0.1);
   border-radius: 100px;
-  z-index: 9999;
-  cursor: pointer;
-  transition: width 0.3s ease, background 0.3s ease, opacity 0.3s ease;
-  user-select: none;
+  overflow: hidden;
+  position: relative;
 }
 
-/* Увеличение при наведении и перетаскивании */
-.scroll-progress-track.scroll-active {
-  width: 16px;
-  background: rgba(255, 255, 255, 0.18);
-}
-
-.scroll-progress-fill {
-  width: 100%;
+.loading-bar-fill {
+  height: 100%;
   background: rgba(255, 255, 255, 0.6);
   border-radius: 100px;
-  transition: background 0.3s ease;
-  min-height: 4px;
+  min-width: 4px;
+  transition: width 0.15s ease-out;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
-.scroll-progress-track.scroll-active .scroll-progress-fill {
-  background: rgba(255, 255, 255, 0.85);
+/* Предотвращаем скролл пока грузится */
+body:has(.loading-screen:not(.loading-screen--hidden)) {
+  overflow: hidden;
 }
 
-/* Мобильные — скрыть шкалу */
+/* ---- Адаптив ---- */
+@media (max-width: 1024px) {
+  .loading-inner {
+    width: 40vw;
+  }
+}
+
 @media (max-width: 768px) {
-  .scroll-progress-track {
-    display: none;
+  .loading-inner {
+    width: 55vw;
   }
 
-  html {
-    scrollbar-width: auto;
+  .loading-bar-track {
+    height: 6px;
   }
 
-  html::-webkit-scrollbar {
-    display: block;
+  .loading-phrase {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .loading-inner {
+    width: 70vw;
+  }
+
+  .loading-bar-track {
+    height: 5px;
+  }
+
+  .loading-phrase {
+    font-size: 12px;
   }
 }
