@@ -10,9 +10,6 @@ const PHRASES = [
   "качаем плагины",
 ];
 
-// Пути к SVG курсоров — должны совпадать с теми, что в CustomCursor.tsx
-const CURSOR_SVGS = ["/icons/cursor.svg", "/icons/pointer.svg"];
-
 function shuffleArray<T>(arr: T[]): T[] {
   const shuffled = [...arr];
   for (let i = shuffled.length - 1; i > 0; i--) {
@@ -20,16 +17,6 @@ function shuffleArray<T>(arr: T[]): T[] {
     [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
   }
   return shuffled;
-}
-
-/** Загружает одно изображение по URL и возвращает промис */
-function preloadImage(src: string): Promise<void> {
-  return new Promise((resolve) => {
-    const img = new Image();
-    img.onload = () => resolve();
-    img.onerror = () => resolve(); // не блокируем если не загрузилось
-    img.src = src;
-  });
 }
 
 export default function LoadingScreen() {
@@ -90,7 +77,7 @@ export default function LoadingScreen() {
     let cancelled = false;
 
     async function waitForReady() {
-      // ── Этап 1: Шрифты (0 → 30%) ──
+      // ── Этап 1: Шрифты (0 → 40%) ──
       try {
         if (document.fonts && document.fonts.ready) {
           await document.fonts.ready;
@@ -99,27 +86,9 @@ export default function LoadingScreen() {
         // ignore
       }
       if (cancelled) return;
-      realProgress.current = 30;
+      realProgress.current = 40;
 
-      // ── Этап 2: SVG курсоров (30 → 45%) ──
-      try {
-        const total = CURSOR_SVGS.length;
-        let loaded = 0;
-
-        for (const src of CURSOR_SVGS) {
-          await preloadImage(src);
-          loaded++;
-          if (!cancelled) {
-            realProgress.current = 30 + (loaded / total) * 15;
-          }
-        }
-      } catch {
-        // ignore
-      }
-      if (cancelled) return;
-      realProgress.current = 45;
-
-      // ── Этап 3: Критичные изображения (45 → 90%) ──
+      // ── Этап 2: Критичные изображения (40 → 90%) ──
       try {
         const criticalImages = document.querySelectorAll<HTMLImageElement>(
           ".photo-img, .case-img, .logo-image"
@@ -131,14 +100,14 @@ export default function LoadingScreen() {
         const imagePromises = Array.from(criticalImages).map((img) => {
           if (img.complete) {
             loaded++;
-            realProgress.current = 45 + (loaded / total) * 45;
+            realProgress.current = 40 + (loaded / total) * 50;
             return Promise.resolve();
           }
           return new Promise<void>((resolve) => {
             const done = () => {
               loaded++;
               if (!cancelled) {
-                realProgress.current = 45 + (loaded / total) * 45;
+                realProgress.current = 40 + (loaded / total) * 50;
               }
               resolve();
             };
@@ -154,12 +123,11 @@ export default function LoadingScreen() {
       if (cancelled) return;
       realProgress.current = 90;
 
-      // ── Этап 4: Финальная пауза (90 → 100%) ──
+      // ── Этап 3: Финальная пауза (90 → 100%) ──
       await new Promise((r) => setTimeout(r, 300));
       if (cancelled) return;
       realProgress.current = 100;
 
-      // Ждём пока анимация прогресса догонит 100%
       await new Promise<void>((resolve) => {
         const check = () => {
           if (displayProgress.current >= 99.5) {
@@ -179,7 +147,6 @@ export default function LoadingScreen() {
 
     waitForReady();
 
-    // Страховка: максимум 6 секунд
     const fallback = setTimeout(() => {
       if (!cancelled) {
         realProgress.current = 100;
