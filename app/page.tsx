@@ -1,5 +1,6 @@
 import ScrollToTop from "./ScrollToTop";
 import Gallery3D from "./Gallery3D";
+import GraphicsGallery from "./GraphicsGallery";
 import CaseImage from "./CaseImage";
 import AnimationGallery from "./AnimationGallery";
 import HeroPhoto from "./HeroPhoto";
@@ -17,10 +18,10 @@ export default function Home() {
             <div className="hero-top">
               <div className="hero-description">
                 <p className="about-text">
-                  Федосов Николай, графический дизайнер c&nbsp;навыками
-                  в&nbsp;разных сферах. Нахожу решения в айдентике, графике,
-                  3D, визуализации, полиграфии, смм, анимации.
-                </p>
+                  Николай Федосов&nbsp;— мультидисциплинарный дизайнер.
+                  Разрабатываю айдентику, мыслю системами, работаю
+                  с&nbsp;графикой, 3D и&nbsp;анимацией
+                                </p>
                 <div className="contacts">
                   <a
                     href="https://t.me/whoseyournemy"
@@ -249,7 +250,7 @@ export default function Home() {
               <div className="divider-line"></div>
               <h2 className="section-title">графика</h2>
             </div>
-            <p className="coming-soon-section">Раздел в разработке...</p>
+            <GraphicsGallery />
           </section>
 
           {/* 3D */}
@@ -262,13 +263,29 @@ export default function Home() {
           </section>
 
           {/* АНИМАЦИЯ */}
-<section id="animation" className="section">
-  <div className="section-divider">
-    <div className="divider-line"></div>
-    <h2 className="section-title">анимация</h2>
-  </div>
-  <AnimationGallery />
-</section>
+          <section id="animation" className="section">
+            <div className="section-divider">
+              <div className="divider-line"></div>
+              <h2 className="section-title">анимация</h2>
+            </div>
+            <AnimationGallery />
+          </section>
+
+          {/* ФУТЕР */}
+          <footer className="site-footer">
+            <div className="footer-divider"></div>
+            <p className="footer-text">
+              Конец страницы — начало проекта. Готов его обсудить{" "}
+              <a
+                href="https://t.me/whoseyournemy"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="footer-link"
+              >
+                @whoseyournemy
+              </a>
+            </p>
+          </footer>
 
         </div>
       </div>

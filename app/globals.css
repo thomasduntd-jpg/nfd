@@ -103,7 +103,7 @@ img {
 }
 
 .hero-description {
-  max-width: 1000px;
+  max-width: 900px;
 }
 
 .about-text {
@@ -703,6 +703,76 @@ img {
   background: rgba(255, 255, 255, 0.85);
 }
 
+/* =============================================
+   GRAPHICS GALLERY — MASONRY
+   ============================================= */
+.graphics-grid {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+}
+
+.graphics-column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.graphics-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 4px;
+  cursor: pointer;
+  line-height: 0;
+}
+
+.graphics-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .graphics-item:hover .graphics-img {
+    transform: scale(1.03);
+  }
+}
+
+/* =============================================
+   ФУТЕР
+   ============================================= */
+.site-footer {
+  margin-top: 60px;
+  padding-top: 0;
+}
+
+.footer-divider {
+  width: 100%;
+  height: 1pt;
+  background: #d4d4d4;
+  margin-bottom: 20px;
+}
+
+.footer-text {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #999;
+  text-align: center;
+}
+
+.footer-link {
+  color: #1a1a1a;
+  font-weight: 500;
+  transition: opacity 0.2s;
+}
+
+.footer-link:hover {
+  opacity: 0.6;
+}
 
 /* =============================================
    АДАПТИВ — ПЛАНШЕТ (1024px)
@@ -768,6 +838,18 @@ img {
   .gallery3d-grid {
     grid-template-columns: repeat(3, 1fr);
     gap: 6px;
+  }
+  
+    .graphics-grid {
+    gap: 6px;
+  }
+
+  .graphics-column {
+    gap: 6px;
+  }
+
+  .site-footer {
+    margin-top: 40px;
   }
 }
 
@@ -919,6 +1001,22 @@ img {
   html::-webkit-scrollbar {
     display: block;
   }
+
+    .graphics-grid {
+    gap: 4px;
+  }
+
+  .graphics-column {
+    gap: 4px;
+  }
+
+  .footer-text {
+    font-size: 15px;
+  }
+
+  .site-footer {
+    margin-top: 32px;
+  }
 }
 
 
@@ -1064,6 +1162,22 @@ img {
   .lightbox-close svg {
     width: 28px;
     height: 28px;
+  }
+
+    .graphics-grid {
+    gap: 3px;
+  }
+
+  .graphics-column {
+    gap: 3px;
+  }
+
+  .footer-text {
+    font-size: 14px;
+  }
+
+  .site-footer {
+    margin-top: 24px;
   }
 }
 

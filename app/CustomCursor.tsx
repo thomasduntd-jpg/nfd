@@ -92,7 +92,7 @@ export default function CustomCursor() {
       const target = e.target as HTMLElement;
 
       const clickableElement = target.closest(
-        'a, button, input, textarea, select, [role="button"], .gallery3d-item, .case-image, .scroll-progress-track'
+        'a, button, input, textarea, select, [role="button"], .graphics-item, .gallery3d-item, .case-image, .scroll-progress-track'
       );
 
       const isLightboxOverlay = target.classList.contains('lightbox-overlay');
