@@ -58,37 +58,6 @@ img {
 
 
 /* =============================================
-   КНОПКА НАВЕРХ
-   ============================================= */
-.scroll-top-btn {
-  position: fixed;
-  bottom: 40px;
-  right: 40px;
-  z-index: 9999;
-  width: 56px;
-  height: 56px;
-  background: #8DFB27;
-  border: none;
-  border-radius: 50%;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: transform 0.2s, opacity 0.2s;
-  box-shadow: 0 4px 16px rgba(141, 251, 39, 0.4);
-}
-
-.scroll-top-btn:hover {
-  transform: scale(1.1);
-}
-
-.scroll-top-btn svg {
-  width: 24px;
-  height: 24px;
-}
-
-
-/* =============================================
    HERO
    ============================================= */
 .hero {
@@ -134,11 +103,6 @@ img {
   justify-content: space-between;
   align-items: flex-end;
   gap: 40px;
-}
-
-/* Плейсхолдер, сохраняющий место в макете */
-.nav-menu-placeholder {
-  flex-shrink: 0;
 }
 
 .nav-menu {
@@ -891,7 +855,7 @@ img {
 
 
 /* =============================================
-   FLOATING NAV — Плавающее меню
+   FLOATING NAV — Плавающее меню (десктоп: слева)
    ============================================= */
 .floating-nav {
   --float-x: 0px;
@@ -956,6 +920,67 @@ img {
 
 
 /* =============================================
+   FLOATING SCROLL TOP — Кнопка наверх (десктоп: справа)
+   ============================================= */
+.floating-scroll-top {
+  --float-x: 0px;
+  --float-y: 0px;
+  --float-rotate: 0deg;
+
+  position: fixed;
+  right: 48px;
+  top: 50%;
+  z-index: 9998;
+  transform: translateY(-50%) translate(var(--float-x), var(--float-y)) rotate(var(--float-rotate));
+  will-change: transform;
+
+  width: 56px;
+  height: 56px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15), 0 2px 8px rgba(0, 0, 0, 0.08);
+
+  opacity: 0;
+  scale: 0.8;
+  pointer-events: none;
+  transition: opacity 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              scale 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              background 0.2s ease;
+}
+
+.floating-scroll-top--visible {
+  opacity: 1;
+  scale: 1;
+  pointer-events: auto;
+}
+
+.floating-scroll-top:hover {
+  background: rgba(255, 255, 255, 1);
+}
+
+.floating-scroll-top svg {
+  width: 24px;
+  height: 24px;
+}
+
+
+/* =============================================
+   FLOATING MOBILE BAR — Мобильная полоса (навигация + кнопка)
+   Скрыта на десктопе, видна на мобилке
+   ============================================= */
+.floating-mobile-bar {
+  display: none;
+}
+
+
+/* =============================================
    АДАПТИВ — ПЛАНШЕТ (1024px)
    ============================================= */
 @media (max-width: 1024px) {
@@ -1004,18 +1029,6 @@ img {
     font-size: 15px;
   }
 
-  .scroll-top-btn {
-    width: 50px;
-    height: 50px;
-    bottom: 32px;
-    right: 32px;
-  }
-
-  .scroll-top-btn svg {
-    width: 22px;
-    height: 22px;
-  }
-
   .gallery3d-grid {
     grid-template-columns: repeat(3, 1fr);
     gap: 6px;
@@ -1049,6 +1062,18 @@ img {
   .floating-nav-arrow {
     width: 9px;
     height: 9px;
+  }
+
+  /* Floating scroll top — планшет */
+  .floating-scroll-top {
+    right: 16px;
+    width: 50px;
+    height: 50px;
+  }
+
+  .floating-scroll-top svg {
+    width: 22px;
+    height: 22px;
   }
 }
 
@@ -1121,18 +1146,6 @@ img {
 
   .section-title {
     font-size: 24px;
-  }
-
-  .scroll-top-btn {
-    width: 48px;
-    height: 48px;
-    bottom: 24px;
-    right: 24px;
-  }
-
-  .scroll-top-btn svg {
-    width: 20px;
-    height: 20px;
   }
 
   .gallery3d-grid {
@@ -1238,6 +1251,18 @@ img {
     width: 8px;
     height: 8px;
   }
+
+  /* Floating scroll top — маленький планшет */
+  .floating-scroll-top {
+    right: 8px;
+    width: 48px;
+    height: 48px;
+  }
+
+  .floating-scroll-top svg {
+    width: 20px;
+    height: 20px;
+  }
 }
 
 
@@ -1324,19 +1349,6 @@ img {
     padding: 8px 16px;
   }
 
-  .scroll-top-btn {
-    width: 44px;
-    height: 44px;
-    bottom: 16px;
-    right: 16px;
-    box-shadow: 0 2px 12px rgba(141, 251, 39, 0.3);
-  }
-
-  .scroll-top-btn svg {
-    width: 18px;
-    height: 18px;
-  }
-
   .gallery3d-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 3px;
@@ -1399,171 +1411,97 @@ img {
 
   .site-footer {
     margin-top: 24px;
-    margin-bottom: 60px;
   }
 
   .speech-bubble {
     display: none;
   }
 
-  /* Floating nav — мобилка: внизу по центру горизонтально */
+  /* ====== МОБИЛКА: скрываем отдельные навигацию и кнопку ====== */
   .floating-nav {
-    left: 50%;
-    top: auto;
-    bottom: 16px;
-    transform: translateX(-50%) translate(var(--float-x), var(--float-y)) rotate(var(--float-rotate));
-    padding: 10px 16px;
-    border-radius: 50px;
+    display: none !important;
   }
 
-  .floating-nav-menu {
-    flex-direction: row;
+  .floating-scroll-top {
+    display: none !important;
+  }
+
+  /* ====== МОБИЛКА: показываем общий бар внизу ====== */
+  .floating-mobile-bar {
+    display: flex;
+    position: fixed;
+    bottom: 16px;
+    left: 50%;
+    z-index: 9998;
+    transform: translateX(-50%);
+
+    align-items: center;
+    gap: 12px;
+
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-radius: 50px;
+    padding: 10px 14px 10px 18px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15), 0 2px 8px rgba(0, 0, 0, 0.08);
+
+    opacity: 0;
+    scale: 0.8;
+    pointer-events: none;
+    transition: opacity 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                scale 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .floating-mobile-bar--visible {
+    opacity: 1;
+    scale: 1;
+    pointer-events: auto;
+  }
+
+  .floating-mobile-nav {
+    display: flex;
+    align-items: center;
     gap: 12px;
     flex-wrap: nowrap;
   }
 
-  .floating-nav-item {
+  .floating-mobile-nav .floating-nav-item {
     font-size: 11px;
     gap: 3px;
     padding: 2px 0;
   }
 
-  .floating-nav-arrow {
+  .floating-mobile-nav .floating-nav-arrow {
     width: 7px;
     height: 7px;
   }
-}
 
-
-/* =============================================
-   МОБИЛЬНЫЕ — СИСТЕМНЫЙ КУРСОР
-   ============================================= */
-@media (hover: none) and (pointer: coarse) {
-  *,
-  *::before,
-  *::after {
-    cursor: auto !important;
+  /* Разделитель между навигацией и кнопкой */
+  .floating-mobile-scroll-top {
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    background: #1a1a1a;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s ease;
+    margin-left: 4px;
   }
 
-  .custom-cursor {
-    display: none !important;
-  }
-}
-
-/* =============================================
-   ЭКРАН ЗАГРУЗКИ
-   ============================================= */
-.loading-screen {
-  position: fixed;
-  inset: 0;
-  z-index: 100000;
-  background: #000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: opacity 0.5s ease;
-}
-
-.loading-screen--hidden {
-  opacity: 0;
-  pointer-events: none;
-}
-
-.loading-inner {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
-  width: 30vw;
-}
-
-/* ---- Текст-фразы ---- */
-.loading-phrase-wrapper {
-  height: 24px;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.loading-phrase {
-  display: block;
-  font-family: 'Inter Tight', sans-serif;
-  font-size: 14px;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.6);
-  white-space: nowrap;
-  animation: loading-phrase-in 0.4s ease both;
-}
-
-@keyframes loading-phrase-in {
-  0% {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* ---- Полоса загрузки (горизонтальная, стиль scroll-progress) ---- */
-.loading-bar-track {
-  width: 100%;
-  height: 8px;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 100px;
-  overflow: hidden;
-  position: relative;
-}
-
-.loading-bar-fill {
-  height: 100%;
-  background: rgba(255, 255, 255, 0.6);
-  border-radius: 100px;
-  min-width: 4px;
-  transition: width 0.15s ease-out;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-/* Предотвращаем скролл пока грузится */
-body:has(.loading-screen:not(.loading-screen--hidden)) {
-  overflow: hidden;
-}
-
-/* ---- Адаптив ---- */
-@media (max-width: 1024px) {
-  .loading-inner {
-    width: 40vw;
-  }
-}
-
-@media (max-width: 768px) {
-  .loading-inner {
-    width: 55vw;
+  .floating-mobile-scroll-top:active {
+    background: #333;
   }
 
-  .loading-bar-track {
-    height: 6px;
+  .floating-mobile-scroll-top svg {
+    width: 16px;
+    height: 16px;
   }
 
-  .loading-phrase {
-    font-size: 13px;
-  }
-}
-
-@media (max-width: 480px) {
-  .loading-inner {
-    width: 70vw;
-  }
-
-  .loading-bar-track {
-    height: 5px;
-  }
-
-  .loading-phrase {
-    font-size: 12px;
+  .floating-mobile-scroll-top svg path {
+    stroke: #fff;
   }
 }

@@ -1,16 +1,14 @@
-import ScrollToTop from "./ScrollToTop";
 import Gallery3D from "./Gallery3D";
 import GraphicsGallery from "./GraphicsGallery";
 import CaseImage from "./CaseImage";
 import AnimationGallery from "./AnimationGallery";
 import HeroPhoto from "./HeroPhoto";
-import FloatingNav from "./FloatingNav";
+import FloatingControls from "./FloatingControls";
 
 export default function Home() {
   return (
     <>
-      <ScrollToTop />
-      <FloatingNav />
+      <FloatingControls />
 
       <div className="page-wrapper">
         <div className="main-frame">
@@ -56,31 +54,28 @@ export default function Home() {
             </div>
 
             <div className="hero-bottom">
-              {/* Плейсхолдер чтобы макет не прыгал */}
-              <div className="nav-menu-placeholder">
-                <nav className="nav-menu">
-                  <a href="#logoteka" className="nav-item">
-                    <span>логотека</span>
-                    <img src="/icons/arrow.svg" alt="" className="nav-arrow" />
-                  </a>
-                  <a href="#identity" className="nav-item">
-                    <span>айдентика</span>
-                    <img src="/icons/arrow.svg" alt="" className="nav-arrow" />
-                  </a>
-                  <a href="#graphics" className="nav-item">
-                    <span>графика</span>
-                    <img src="/icons/arrow.svg" alt="" className="nav-arrow" />
-                  </a>
-                  <a href="#threed" className="nav-item">
-                    <span>3D</span>
-                    <img src="/icons/arrow.svg" alt="" className="nav-arrow" />
-                  </a>
-                  <a href="#animation" className="nav-item">
-                    <span>анимация</span>
-                    <img src="/icons/arrow.svg" alt="" className="nav-arrow" />
-                  </a>
-                </nav>
-              </div>
+              <nav className="nav-menu">
+                <a href="#logoteka" className="nav-item">
+                  <span>логотека</span>
+                  <img src="/icons/arrow.svg" alt="" className="nav-arrow" />
+                </a>
+                <a href="#identity" className="nav-item">
+                  <span>айдентика</span>
+                  <img src="/icons/arrow.svg" alt="" className="nav-arrow" />
+                </a>
+                <a href="#graphics" className="nav-item">
+                  <span>графика</span>
+                  <img src="/icons/arrow.svg" alt="" className="nav-arrow" />
+                </a>
+                <a href="#threed" className="nav-item">
+                  <span>3D</span>
+                  <img src="/icons/arrow.svg" alt="" className="nav-arrow" />
+                </a>
+                <a href="#animation" className="nav-item">
+                  <span>анимация</span>
+                  <img src="/icons/arrow.svg" alt="" className="nav-arrow" />
+                </a>
+              </nav>
 
               <HeroPhoto />
             </div>
