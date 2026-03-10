@@ -1,71 +1,205 @@
 "use client";
 
-import { useRef, useCallback, useState } from "react";
+import { useRef, useState, useEffect, useCallback } from "react";
+
+const PHRASES = [
+  "люблю метафоры",
+  "системы — это круто",
+  "ахахахахаах",
+  "да да, тренды",
+  "иногда я мечтаю о сыре",
+  "сетка — мой друг",
+  "главное чтобы было читаемо",
+  "скорее всего я зумер...",
+  "почему прозрачный фон в клеточку",
+  "какой размер у конверта?",
+  "жизнь игра — играй красиво",
+];
+
+const BUBBLE_INTERVAL = 4000;
+const BUBBLE_LIFETIME = 4000;
+
+interface Bubble {
+  id: number;
+  text: string;
+  side: "left" | "right";
+  offsetY: number;
+}
+
+let bubbleIdCounter = 0;
+
+/** Перемешивание массива (Fisher–Yates) */
+function shuffle<T>(arr: T[]): T[] {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
 
 export default function HeroPhoto() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [transform, setTransform] = useState("perspective(800px) rotateX(0deg) rotateY(0deg) scale(1)");
-  const [glareStyle, setGlareStyle] = useState<React.CSSProperties>({
-    opacity: 0,
-    background: "radial-gradient(circle at 50% 50%, rgba(255,255,255,0.35) 0%, transparent 60%)",
-  });
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const glareRef = useRef<HTMLDivElement>(null);
+  const isHovering = useRef(false);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const removeTimersRef = useRef<Set<ReturnType<typeof setTimeout>>>(new Set());
+  const lastSideRef = useRef<"left" | "right">("right");
 
+  // Перемешанная очередь фраз — когда заканчивается, перемешиваем заново
+  const shuffledRef = useRef<string[]>([]);
+  const indexRef = useRef(0);
+
+  const [bubbles, setBubbles] = useState<Bubble[]>([]);
+
+  /** Берём следующую фразу из перемешанного списка */
+  const getNextPhrase = useCallback((): string => {
+    // Если очередь пуста или дошли до конца — перемешиваем заново
+    if (
+      shuffledRef.current.length === 0 ||
+      indexRef.current >= shuffledRef.current.length
+    ) {
+      shuffledRef.current = shuffle(PHRASES);
+      indexRef.current = 0;
+    }
+    const phrase = shuffledRef.current[indexRef.current];
+    indexRef.current += 1;
+    return phrase;
+  }, []);
+
+  /* ===== 3D tilt ===== */
   const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
-    const container = containerRef.current;
-    if (!container) return;
+    const el = wrapperRef.current;
+    const glare = glareRef.current;
+    if (!el || !glare) return;
 
-    const rect = container.getBoundingClientRect();
+    const rect = el.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
+    const hw = rect.width / 2;
+    const hh = rect.height / 2;
 
-    // Нормализуем от -1 до 1
-    const normalizedX = (x - centerX) / centerX;
-    const normalizedY = (y - centerY) / centerY;
+    const rotateY = ((x - hw) / hw) * 8;
+    const rotateX = ((hh - y) / hh) * 8;
 
-    // Углы наклона (максимум ±12 градусов)
-    const maxTilt = 12;
-    const rotateY = normalizedX * maxTilt;
-    const rotateX = -normalizedY * maxTilt;
+    el.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
 
-    setTransform(
-      `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.03)`
-    );
-
-    // Позиция блика — следует за курсором
-    const glareX = (x / rect.width) * 100;
-    const glareY = (y / rect.height) * 100;
-
-    setGlareStyle({
-      opacity: 0.5,
-      background: `radial-gradient(circle at ${glareX}% ${glareY}%, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.1) 35%, transparent 65%)`,
-    });
+    const gx = (x / rect.width) * 100;
+    const gy = (y / rect.height) * 100;
+    glare.style.background = `radial-gradient(circle at ${gx}% ${gy}%, rgba(255,255,255,0.25) 0%, transparent 60%)`;
+    glare.style.opacity = "1";
   }, []);
 
+  const resetTilt = useCallback(() => {
+    const el = wrapperRef.current;
+    const glare = glareRef.current;
+    if (el) el.style.transform = "perspective(800px) rotateX(0deg) rotateY(0deg)";
+    if (glare) glare.style.opacity = "0";
+  }, []);
+
+  /* ===== Полная очистка ===== */
+  const clearAll = useCallback(() => {
+    if (timerRef.current) {
+      clearTimeout(timerRef.current);
+      timerRef.current = null;
+    }
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+      intervalRef.current = null;
+    }
+    removeTimersRef.current.forEach((t) => clearTimeout(t));
+    removeTimersRef.current.clear();
+    setBubbles([]);
+  }, []);
+
+  /* ===== Spawn бабла ===== */
+  const spawnBubble = useCallback(() => {
+    const text = getNextPhrase();
+
+    const side: "left" | "right" =
+      Math.random() < 0.3
+        ? lastSideRef.current
+        : lastSideRef.current === "left"
+        ? "right"
+        : "left";
+    lastSideRef.current = side;
+
+    const offsetY = Math.round(Math.random() * 60 - 30);
+    const id = ++bubbleIdCounter;
+
+    setBubbles([{ id, text, side, offsetY }]);
+
+    removeTimersRef.current.forEach((t) => clearTimeout(t));
+    removeTimersRef.current.clear();
+
+    const removeTimer = setTimeout(() => {
+      setBubbles((prev) => prev.filter((b) => b.id !== id));
+      removeTimersRef.current.delete(removeTimer);
+    }, BUBBLE_LIFETIME);
+
+    removeTimersRef.current.add(removeTimer);
+  }, [getNextPhrase]);
+
+  /* ===== Mouse enter ===== */
+  const handleMouseEnter = useCallback(() => {
+    isHovering.current = true;
+    clearAll();
+
+    timerRef.current = setTimeout(() => {
+      if (!isHovering.current) return;
+      spawnBubble();
+
+      intervalRef.current = setInterval(() => {
+        if (!isHovering.current) return;
+        spawnBubble();
+      }, BUBBLE_INTERVAL);
+    }, 800);
+  }, [clearAll, spawnBubble]);
+
+  /* ===== Mouse leave ===== */
   const handleMouseLeave = useCallback(() => {
-    setTransform("perspective(800px) rotateX(0deg) rotateY(0deg) scale(1)");
-    setGlareStyle((prev) => ({
-      ...prev,
-      opacity: 0,
-    }));
-  }, []);
+    isHovering.current = false;
+    clearAll();
+    resetTilt();
+  }, [clearAll, resetTilt]);
+
+  useEffect(() => {
+    return () => {
+      clearAll();
+    };
+  }, [clearAll]);
 
   return (
-    <div className="hero-photo">
+    <div className="hero-photo-container">
+      {bubbles.map((b) => (
+        <div
+          key={b.id}
+          className={`speech-bubble speech-bubble--${b.side}`}
+          style={{ "--bubble-offset-y": `${b.offsetY}px` } as React.CSSProperties}
+        >
+          <div className="speech-bubble-cloud speech-bubble-cloud--1" />
+          <div className="speech-bubble-cloud speech-bubble-cloud--2" />
+          <div className="speech-bubble-body">
+            <span>{b.text}</span>
+          </div>
+        </div>
+      ))}
+
       <div
-        ref={containerRef}
         className="photo-tilt-wrapper"
+        ref={wrapperRef}
         onMouseMove={handleMouseMove}
+        onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
-        style={{ transform }}
       >
         <img
           src="/images/nf.jpg"
-          alt="Федосов Николай"
+          alt="Николай Федосов"
           className="photo-img"
+          draggable={false}
         />
-        <div className="photo-glare" style={glareStyle} />
+        <div className="photo-glare" ref={glareRef} />
       </div>
     </div>
   );

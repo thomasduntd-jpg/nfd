@@ -53,7 +53,7 @@ img {
   background: #fff;
   border-radius: 10px;
   padding: 60px;
-  overflow: hidden;
+  overflow: visible;
 }
 
 
@@ -136,6 +136,11 @@ img {
   gap: 40px;
 }
 
+/* Плейсхолдер, сохраняющий место в макете */
+.nav-menu-placeholder {
+  flex-shrink: 0;
+}
+
 .nav-menu {
   display: flex;
   flex-direction: column;
@@ -215,6 +220,116 @@ img {
   }
 }
 
+/* =============================================
+   HERO PHOTO CONTAINER + SPEECH BUBBLES
+   ============================================= */
+.hero-photo-container {
+  position: relative;
+  flex-shrink: 0;
+}
+
+/* ---- Бабл ---- */
+.speech-bubble {
+  position: absolute;
+  top: 20%;
+  z-index: 10;
+  pointer-events: none;
+  animation: bubble-appear 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards,
+             bubble-disappear 0.35s ease-in forwards;
+  animation-delay: 0s, 3.6s;
+  opacity: 0;
+  --bubble-offset-y: 0px;
+  transform: translateY(calc(-50% + var(--bubble-offset-y)));
+}
+
+.speech-bubble--left {
+  right: calc(100% - 40px);
+  left: auto;
+}
+
+.speech-bubble--right {
+  left: calc(100% - 40px);
+  right: auto;
+}
+
+@keyframes bubble-appear {
+  0% {
+    opacity: 0;
+    scale: 0.5;
+  }
+  100% {
+    opacity: 1;
+    scale: 1;
+  }
+}
+
+@keyframes bubble-disappear {
+  0% {
+    opacity: 1;
+    scale: 1;
+  }
+  100% {
+    opacity: 0;
+    scale: 0.7;
+  }
+}
+
+/* ---- Тело бабла ---- */
+.speech-bubble-body {
+  background: #e9e9e9;
+  border-radius: 10px;
+  padding: 12px 16px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #1a1a1a;
+  line-height: 1.35;
+  white-space: nowrap;
+  position: relative;
+}
+
+/* ---- Маленькие квадратные облачка ---- */
+.speech-bubble-cloud {
+  position: absolute;
+  background: #e9e9e9;
+  border-radius: 5px;
+}
+
+.speech-bubble-cloud--1 {
+  width: 14px;
+  height: 14px;
+  bottom: -8px;
+}
+
+.speech-bubble-cloud--2 {
+  width: 8px;
+  height: 8px;
+  bottom: -18px;
+}
+
+/* Облачка для левого бабла — справа (указывают на фото) */
+.speech-bubble--left .speech-bubble-cloud--1 {
+  right: -5px;
+}
+
+.speech-bubble--left .speech-bubble-cloud--2 {
+  right: -10px;
+}
+
+/* Облачка для правого бабла — слева (указывают на фото) */
+.speech-bubble--right .speech-bubble-cloud--1 {
+  left: -5px;
+}
+
+.speech-bubble--right .speech-bubble-cloud--2 {
+  left: -10px;
+}
+
+/* ---- Скрываем баблы на мобильных ---- */
+@media (hover: none) and (pointer: coarse) {
+  .speech-bubble {
+    display: none !important;
+  }
+}
 
 /* =============================================
    SECTION DIVIDER
@@ -774,6 +889,72 @@ img {
   opacity: 0.6;
 }
 
+
+/* =============================================
+   FLOATING NAV — Плавающее меню
+   ============================================= */
+.floating-nav {
+  --float-x: 0px;
+  --float-y: 0px;
+  --float-rotate: 0deg;
+
+  position: fixed;
+  left: 24px;
+  top: 50%;
+  z-index: 9998;
+  transform: translateY(-50%) translate(var(--float-x), var(--float-y)) rotate(var(--float-rotate));
+  will-change: transform;
+
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: 16px;
+  padding: 16px 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15), 0 2px 8px rgba(0, 0, 0, 0.08);
+
+  opacity: 0;
+  scale: 0.8;
+  pointer-events: none;
+  transition: opacity 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              scale 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.floating-nav--visible {
+  opacity: 1;
+  scale: 1;
+  pointer-events: auto;
+}
+
+.floating-nav-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.floating-nav-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.3;
+  color: #1a1a1a;
+  transition: opacity 0.2s;
+  padding: 4px 0;
+  white-space: nowrap;
+}
+
+.floating-nav-item:hover {
+  opacity: 0.5;
+}
+
+.floating-nav-arrow {
+  width: 10px;
+  height: 10px;
+  flex-shrink: 0;
+}
+
+
 /* =============================================
    АДАПТИВ — ПЛАНШЕТ (1024px)
    ============================================= */
@@ -839,8 +1020,8 @@ img {
     grid-template-columns: repeat(3, 1fr);
     gap: 6px;
   }
-  
-    .graphics-grid {
+
+  .graphics-grid {
     gap: 6px;
   }
 
@@ -850,6 +1031,24 @@ img {
 
   .site-footer {
     margin-top: 40px;
+  }
+
+  /* Floating nav — планшет */
+  .floating-nav {
+    left: 16px;
+    padding: 14px 16px;
+    border-radius: 14px;
+  }
+
+  .floating-nav-item {
+    font-size: 14px;
+    gap: 5px;
+    padding: 3px 0;
+  }
+
+  .floating-nav-arrow {
+    width: 9px;
+    height: 9px;
   }
 }
 
@@ -1002,7 +1201,7 @@ img {
     display: block;
   }
 
-    .graphics-grid {
+  .graphics-grid {
     gap: 4px;
   }
 
@@ -1016,6 +1215,28 @@ img {
 
   .site-footer {
     margin-top: 32px;
+  }
+
+  .speech-bubble {
+    display: none;
+  }
+
+  /* Floating nav — маленький планшет */
+  .floating-nav {
+    left: 8px;
+    padding: 12px 14px;
+    border-radius: 12px;
+  }
+
+  .floating-nav-item {
+    font-size: 13px;
+    gap: 4px;
+    padding: 3px 0;
+  }
+
+  .floating-nav-arrow {
+    width: 8px;
+    height: 8px;
   }
 }
 
@@ -1164,7 +1385,7 @@ img {
     height: 28px;
   }
 
-    .graphics-grid {
+  .graphics-grid {
     gap: 3px;
   }
 
@@ -1178,6 +1399,37 @@ img {
 
   .site-footer {
     margin-top: 24px;
+  }
+
+  .speech-bubble {
+    display: none;
+  }
+
+  /* Floating nav — мобилка: внизу по центру горизонтально */
+  .floating-nav {
+    left: 50%;
+    top: auto;
+    bottom: 16px;
+    transform: translateX(-50%) translate(var(--float-x), var(--float-y)) rotate(var(--float-rotate));
+    padding: 10px 16px;
+    border-radius: 50px;
+  }
+
+  .floating-nav-menu {
+    flex-direction: row;
+    gap: 12px;
+    flex-wrap: nowrap;
+  }
+
+  .floating-nav-item {
+    font-size: 11px;
+    gap: 3px;
+    padding: 2px 0;
+  }
+
+  .floating-nav-arrow {
+    width: 7px;
+    height: 7px;
   }
 }
 
