@@ -17,6 +17,8 @@ const images = [
   { src: "/images/graphics-10.png", alt: "Графика 10" },
   { src: "/images/graphics-11.png", alt: "Графика 11" },
   { src: "/images/graphics-12.png", alt: "Графика 12" },
+  { src: "/images/graphics-13.png", alt: "Графика 13" },
+  { src: "/images/graphics-14.png", alt: "Графика 14" },
   // Добавляйте сколько нужно — сетка адаптируется автоматически
 ];
 

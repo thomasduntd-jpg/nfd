@@ -13,6 +13,10 @@ const videos = [
     title: "Анимация 3",
     embedUrl: "https://kinescope.io/embed/ojoXCfbfRykcX1GJHHWWRK",
   },
+  {
+    title: "Анимация 4",
+    embedUrl: "https://kinescope.io/embed/rbgYLRacaFtB7EYCpC1bqA",
+  },
   
 ];
 

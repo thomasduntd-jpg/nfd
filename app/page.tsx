@@ -95,7 +95,6 @@ export default function Home() {
                 </div>
                 <p className="logo-name">Тюмень</p>
                 <p className="logo-desc">Айдентика города</p>
-                <a href="https://dprofile.ru" target="_blank" rel="noopener noreferrer" className="btn-blue">Кейс на Dprofile</a>
               </div>
 
               <div className="logo-item">
@@ -184,7 +183,7 @@ export default function Home() {
                   и&nbsp;позиционирование, фирменный стиль стал выглядеть современнее
                   на фоне конкурентов
                 </p>
-                <a href="#" target="_blank" rel="noopener noreferrer" className="btn-blue">Брендбук</a>
+                <a href="https://www.figma.com/deck/qP51owErgxRJY2g0WTa34f/Untitled?node-id=1-826&viewport=-97%2C-126%2C0.59&t=REjitHT3ovh3pRZs-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1" target="_blank" rel="noopener noreferrer" className="btn-blue">Брендбук</a>
               </div>
               <CaseImage src="/images/case-imsa.jpg" alt="Кейс IMSA" />
             </div>
@@ -201,9 +200,11 @@ export default function Home() {
                   облик города во всех красках и переосмыслить исторические символы города.
                 </p>
                 <p className="case-text">
-                  Провел предпроектный анализ, выявил ключевые образы, цветовые коды
+                  Провел предпроектный анализ, выявил ключевые образы и&nbsp;цветовые константы. 
+                  Разработал сувенирную продукцию и оформил носители разного формата в&nbsp;соответсвии 
+                  с&nbsp;дизайн-кодом
                 </p>
-                <a href="https://dprofile.ru" target="_blank" rel="noopener noreferrer" className="btn-blue">Кейс на Dprofile</a>
+                <a href="https://dprofile.ru/case/166497/tiumen-aidentika-goroda-tyumen-city-identity" target="_blank" rel="noopener noreferrer" className="btn-blue">Кейс на Dprofile</a>
               </div>
               <CaseImage src="/images/case-tyumen.jpg" alt="Кейс Тюмень" />
             </div>
@@ -219,9 +220,9 @@ export default function Home() {
                 </p>
                 <p className="case-text">
                   Создана навигация и&nbsp;сувенирная продукция. Геральдика лаконично
-                  вписалась в контекст территории с&nbsp;её множеством символов и&nbsp;смыслов.
+                  вписалась в контекст территории с&nbsp;её множеством символов и&nbsp;смыслов
                 </p>
-                <a href="https://dprofile.ru" target="_blank" rel="noopener noreferrer" className="btn-blue">Кейс на Dprofile</a>
+                <a href="https://dprofile.ru/case/113771/ilinskaia-sloboda" target="_blank" rel="noopener noreferrer" className="btn-blue">Кейс на Dprofile</a>
               </div>
               <CaseImage src="/images/case-sloboda.jpg" alt="Кейс Ильинская Слобода" />
             </div>
@@ -234,10 +235,10 @@ export default function Home() {
                 <p className="case-text">
                   В основе идеи лежит линия — рубеж, проходя который дети растут
                   в&nbsp;своих навыках, учатся помогать и&nbsp;набираются дисциплине. Эта&nbsp;идея
-                  заложена в&nbsp;знаке, где из&nbsp;грубого, текст переходит в&nbsp;ровный и&nbsp;аккуратный
+                  заложена в&nbsp;знаке, где&nbsp;из&nbsp;грубого, текст переходит в&nbsp;ровный и&nbsp;аккуратный
                 </p>
                 <p className="case-text">
-                  Провел предпроектный анализ, выявил ключевые образы, цветовые коды
+                  Разработал айдентику на основе природных фактур и&nbsp;образа перехода
                 </p>
               </div>
               <CaseImage src="/images/case-rubezh.jpg" alt="Кейс Рубеж" />
